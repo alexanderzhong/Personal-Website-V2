@@ -1,0 +1,37 @@
+.display {
+  margin-left: max(8vw, 10px);
+  margin-right: max(8vw, 10px);
+}
+
+#display-header {
+  margin-top: 20px;
+}
+
+#back {
+  width: auto;
+  height: 50px;
+  display: inline;
+  margin-right: 10px;
+  margin-bottom: 18px;
+}
+
+#back:hover {
+  cursor: pointer;
+}
+
+#display-title {
+  display: inline;
+  font-size: 40px;
+  margin-top: 40px;
+  height: 40px;
+  overflow: hidden;
+  max-width: 80vw;
+}
+
+#display-description {
+  margin-top: 10px;
+}
+
+#demo {
+  margin-top: 10px;
+}

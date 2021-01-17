@@ -1,0 +1,55 @@
+.portfolio {
+  display: block;
+  background-color: #eeeeee;
+  min-height: 150vh;
+}
+
+.sort-title {
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 5px;
+  color: #808080;
+}
+
+.dropdown {
+  display: inline-block;
+}
+
+#dropdown-stuff .dropdown-item {
+  color: #006064;
+}
+
+#dropdown-stuff .dropdown-item-active {
+  color: black;
+  font-weight: bold;
+}
+
+.sort-btn {
+  border: solid #e0e0e0;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  height: 32px;
+  width: 80px;
+  font-size: 14px;
+  z-index: -1;
+}
+
+.sort-by {
+  column-gap: 40px;
+  row-gap: 40px;
+  margin-left: 8vw;
+  margin-right: 8vw;
+  margin-bottom: 20px;
+}
+
+#head-title {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  margin-left: 8vw;
+  margin-right: 8vw;
+}
