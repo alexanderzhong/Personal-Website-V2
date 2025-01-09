@@ -1,3 +1,22 @@
+:root {
+  --primary: #9E9E9E;
+  --primary-variant: #616161;
+  --secondary: #90A4AE;
+  --secondary-variant: #546E7A;
+  --background: #ffffff;
+  --surface: #ffffff;
+  --on-primary: #ffffff;
+  --on-primary-variant: #ffffff;
+  --on-secondary: #000000;
+  --on-secondary-variant: #000000;
+  --on-background: #000000;
+  --on-surface: #000000;
+  --primary-container: #E0E0E0;
+  --secondary-container: #B0BEC5;
+  --on-primary-container: #424242;
+  --on-secondary-container: #37474F;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

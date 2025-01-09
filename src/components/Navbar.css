@@ -1,21 +1,54 @@
+@value --primary from "../App.css";
+@value --primary-variant from "../App.css";
+@value --secondary from "../App.css";
+@value --secondary-variant from "../App.css";
+@value --background from "../App.css";
+@value --surface from "../App.css";
+@value --on-primary from "../App.css";
+@value --on-primary-variant from "../App.css";
+@value --on-secondary from "../App.css";
+@value --on-secondary-variant from "../App.css";
+@value --on-background from "../App.css";
+@value --on-surface from "../App.css";
+@value --primary-container from "../App.css";
+@value --secondary-container from "../App.css";
+@value --on-primary-container from "../App.css";
+@value --on-secondary-container from "../App.css";
+
+/* Nav bar button */
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+  color: var(--on-background);
+}
+
+/* Close button */
+.navbar-toggle {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.navbar-toggle svg {
+  margin-right: 20px;
+}
+
+/* Top navbar */
 .navbar {
-  /* background-color: #060b26; */
-  background-color: #424242;
+  background-color: var(--background);
   height: 80px;
   display: flex;
   justify-content: start;
   align-items: center;
 }
 
-.menu-bars {
-  margin-left: 2rem;
-  font-size: 2rem;
-  background: none;
-}
-
+/* Side bar container */
 .nav-menu {
-  background-color: #424242;
-  width: 250px;
+  background-color: var(--background);
+  width: 400px;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -30,53 +63,67 @@
   transition: 350ms;
 }
 
+/* Nav item */
 .nav-text {
   display: flex;
   justify-content: start;
   align-items: center;
   padding: 8px 0px 8px 16px;
   list-style: none;
-  height: 60px;
+  height: 80px;
 }
 
 .nav-text a {
   text-decoration: none;
-  color: #f5f5f5;
-  font-size: 18px;
-  width: 95%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  border-radius: 4px;
 }
 
-.nav-text a:hover {
-  /* background-color: #1a83ff; */
-  background-color: #428e92;
-  color: #f5f5f5;
-  text-decoration: none;
+.nav-text span {
+  color: var(--on-background);
+  font-size: 32px;
+  height: 100%;
+  align-items: center;
+  display: block;
+  position: relative;
+  padding: 0.1em 0;
+}
+
+/* Nav item underline fade in */
+.nav-text span::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+  background-color: var(--on-background);
+  opacity: 0;
+  transition: opacity 200ms, transform 200ms;
+}
+
+.nav-text span:hover::after,
+.nav-text span:focus::after {
+  opacity: 1;
+  transform: translate3d(0, 0.2em, 0);
+}
+
+.nav-text span::after {
+  opacity: 1;
+  transform: scale(0);
+  transform-origin: center;
+}
+
+.nav-text span:hover::after,
+.nav-text span:focus::after{
+  transform: scale(1);
 }
 
 .nav-menu-items {
   width: 100%;
 }
 
-.navbar-toggle {
-  background-color: #424242;
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-
-span {
-  margin-left: 16px;
-}
-
+/* Title of page */
 #page-name {
-  color: white;
+  color: var(--on-background);
   position: absolute;
   left: 50%;
   transform: translatex(-50%);

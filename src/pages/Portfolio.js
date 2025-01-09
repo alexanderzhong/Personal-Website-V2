@@ -164,7 +164,6 @@ class Portfolio extends Component {
       if (this.state.mode) {
         return (
           <div className='portfolio'>
-              {/* <h1 id='head-title'>Portfolio</h1> */}
               <div className='sort-by'>
                 <h2 className='sort-title'>SORT BY</h2>
                 <div className="dropdown">

@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import './element.css';
+import avodigyPreview from '../assets/img/AvodigyPreview.png'
+import scottyPreview from '../assets/img/scottypreview.png'
+import ajendaPreview from '../assets/img/AjendaPreview.png'
+import netbrainPreview from '../assets/img/NetBrainPreview.png'
+import cd39l3Preview from '../assets/img/cd39l3preview.png'
 
 const imgs = {
-    0: require('../assets/img/AvodigyPreview.png').default,
-    1: require('../assets/img/scottypreview.png').default,
-    2: require('../assets/img/AjendaPreview.png').default,
-    3: require('../assets/img/NetBrainPreview.png').default,
-    4: require('../assets/img/cd39l3preview.png').default,
+    0: avodigyPreview,
+    1: scottyPreview,
+    2: ajendaPreview,
+    3: netbrainPreview,
+    4: cd39l3Preview,
 }
 
 export class PortfolioElement extends Component {
@@ -39,7 +44,6 @@ export class PortfolioElement extends Component {
         // const baseURL = './../assets/img/'
         return (
             <div className='element-container' style={this.getStyle()} onClick={this.props.onClick}>
-                {/* <img src={require(baseURL + this.props.info.preview)} /> */}
                 <img id='preview' src={imgs[this.props.info.id]} />
                 <h1 id='ele-title'>{this.props.info.title}</h1>
                 <p id='brief'>{this.props.info.brief}</p>

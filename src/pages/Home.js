@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './home.css';
-import profile from '../assets/img/profile.jpg'
+import profile from '../assets/img/profile_picture.jpg'
 import resume from '../assets/documents/AlexanderZhongResume.pdf'
 
 class Home extends Component {
     render () {
         return (
         <div className='home'>
-            <h1 className='home-title'>Welcome!</h1>
+            <title>Alexander Zhong</title>
+            <h1 className='home-title'>Hello!</h1>
             <div className='content'>
                 <br/>
                 <div className="about">
@@ -15,8 +16,9 @@ class Home extends Component {
                     <div className="about-chunk">
                         <img src={profile} id="profile-picture"/>
                         <p id="about-content">
-                            Hi, I'm Alex, a computer science major at Carnegie Mellon University, with a double major in mathematical
-                            sciences. I am currently in my junior year of undergrad, graduating May of 2022. In addition to my computer
+                            Hi, I'm Alex, a software engineer working at Google. I graduated from Carnegie Mellon University in 2022, 
+                            majoring in computer science with a double major in mathematical
+                            sciences. In addition to my computer
                             science experience, I have had a significant amount of biomedical research experience as well, after 
                             interning at Harvard Medical School and publishing a first author research paper about the pancreatic protein
                             CD39L3. 
@@ -69,7 +71,7 @@ class Home extends Component {
                 <div className="contact">
                     <h3>Contact</h3>
                     <p>
-                        Email: azhong@andrew.cmu.edu <br/>
+                        Email: alexhyzhong@gmail.com or azhong@alumni.cmu.edu <br/>
                         Mailing Address: 5032 FORBES AVENUE, SMC 3414, PITTSBURGH, PA 15289
                     </p>
                 </div>

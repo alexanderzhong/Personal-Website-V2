@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
+import {COLORS} from './../assets/constants/colors.js';
 
 class Navbar extends Component {
     // const [sidebar, setSidebar] = useState(false)
@@ -29,11 +30,11 @@ class Navbar extends Component {
     render () {
         return (
             <>
-            <IconContext.Provider value={{color: '#fff'}}>
+            <IconContext.Provider value={{color: COLORS.on_background}}>
                 <div>
                     <div className="navbar">
                         <Link to="#" className='menu-bars'>
-                            <FaIcons.FaBars onClick={this.showSidebar}/>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill={COLORS.on_surface} onClick={this.showSidebar}><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
                         </Link>
                         <h1 id='page-name'>{this.state.page ? 'Portfolio' : 'Home'}</h1>
                     </div>
@@ -41,15 +42,15 @@ class Navbar extends Component {
                 <nav className={this.state.sidebar ? 'nav-menu active' : 'nav-menu'} style={{zIndex: 5}}>
                     <ul className='nav-menu-items' onClick={this.showSidebar}>
                         <li className='navbar-toggle'>
-                            <Link to='#' className='menu-bars'>
-                                <AiIcons.AiOutlineClose />
+                            <Link to='#' className='menu-close'>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill={COLORS.on_surface}><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
                             </Link>
                         </li>
                         {SidebarData.map((item, index) => {
                             return (
                                 <li key={index} className={item.cName}>
                                     <Link to={item.path} onClick={() => this.setState({page: index})}>
-                                        {item.icon}
+                                        {/* {item.icon} */}
                                         <span>{item.title}</span>
                                     </Link>
                                 </li>

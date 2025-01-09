@@ -1,6 +1,23 @@
+@value --primary from "../App.css";
+@value --primary-variant from "../App.css";
+@value --secondary from "../App.css";
+@value --secondary-variant from "../App.css";
+@value --background from "../App.css";
+@value --surface from "../App.css";
+@value --on-primary from "../App.css";
+@value --on-primary-variant from "../App.css";
+@value --on-secondary from "../App.css";
+@value --on-secondary-variant from "../App.css";
+@value --on-background from "../App.css";
+@value --on-surface from "../App.css";
+@value --primary-container from "../App.css";
+@value --secondary-container from "../App.css";
+@value --on-primary-container from "../App.css";
+@value --on-secondary-container from "../App.css";
+
 .portfolio {
   display: block;
-  background-color: #eeeeee;
+  background-color: var(--background);
   min-height: 150vh;
 }
 
@@ -8,7 +25,7 @@
   font-size: 14px;
   display: inline-block;
   margin-right: 5px;
-  color: #808080;
+  color: var(--on-background);
 }
 
 .dropdown {
