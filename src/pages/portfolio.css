@@ -3,12 +3,14 @@
 @value --secondary from "../App.css";
 @value --secondary-variant from "../App.css";
 @value --background from "../App.css";
+@value --background-variant from "../App.css";
 @value --surface from "../App.css";
 @value --on-primary from "../App.css";
 @value --on-primary-variant from "../App.css";
 @value --on-secondary from "../App.css";
 @value --on-secondary-variant from "../App.css";
 @value --on-background from "../App.css";
+@value --on-background-variant from "../App.css";
 @value --on-surface from "../App.css";
 @value --primary-container from "../App.css";
 @value --secondary-container from "../App.css";
@@ -21,6 +23,52 @@
   min-height: 150vh;
 }
 
+/* .search-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 8vw;
+  margin-right: 8vw;
+  margin-bottom: 30px;
+  width: auto;
+  padding: 12px 10px 12px 10px;
+  background-color: var(--secondary-container);
+  border-radius: 5px 5px 5px 5px;
+} */
+
+/* .search-icon {
+  vertical-align: middle;
+  display: inline-block;
+  color: var(--on-background);
+} */
+
+/* Search bar css */
+.search-bar-input {
+  font-size: 20px;
+  color: var(--on-background-variant);
+  vertical-align: middle;
+  display: inline-block;
+  cursor: text;
+  background-image: url("../assets/img/search.svg");
+  background-repeat: no-repeat;
+  border-radius: 5px 5px 5px 5px;
+  background-position: 10px 50%;
+  margin-left: 8vw;
+  margin-right: 8vw;
+  padding: 12px 10px 12px 40px;
+  width: calc(100% - 16vw);
+  border: 2px solid var(--background);
+  background-color: var(--background-variant);
+}
+
+.search-bar-input:focus {
+  border: 2px solid var(--primary);
+  outline: none;
+  /* background-color: black; */
+  /* border: none; */
+}
+
+/* Dropdown menu */
 .sort-title {
   font-size: 14px;
   display: inline-block;
@@ -57,6 +105,28 @@
   margin-left: 8vw;
   margin-right: 8vw;
   margin-bottom: 20px;
+}
+
+/* Filter Nodes */
+#filter-node-container {
+  margin: 10px 8vw 0px 8vw;
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+}
+
+.filter-node {
+  font-size: 16px;
+  padding: 5px 20px 5px 20px;
+  border-radius: 20px;
+  background-color: var(--primary-container);
+  margin: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.filter-node:focus {
+  background-color: var(--secondary-container);
 }
 
 #head-title {

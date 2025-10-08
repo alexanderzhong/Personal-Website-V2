@@ -1,35 +1,120 @@
+@value --primary from "../App.css";
+@value --primary-variant from "../App.css";
+@value --secondary from "../App.css";
+@value --secondary-variant from "../App.css";
+@value --background from "../App.css";
+@value --surface from "../App.css";
+@value --on-primary from "../App.css";
+@value --on-primary-variant from "../App.css";
+@value --on-secondary from "../App.css";
+@value --on-secondary-variant from "../App.css";
+@value --on-background from "../App.css";
+@value --on-surface from "../App.css";
+@value --primary-container from "../App.css";
+@value --secondary-container from "../App.css";
+@value --on-primary-container from "../App.css";
+@value --on-secondary-container from "../App.css";
+
 .display {
   margin-left: max(8vw, 10px);
   margin-right: max(8vw, 10px);
 }
 
-#display-header {
-  margin-top: 20px;
-}
-
 #back {
-  width: auto;
-  height: 50px;
-  display: inline;
+  display: block;
   margin-right: 10px;
-  margin-bottom: 18px;
-}
-
-#back:hover {
+  margin-bottom: 10px;
+  align-items: center;
   cursor: pointer;
 }
 
+.icon,
+.tag-svg {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+label {
+  vertical-align: middle;
+  display: inline-block;
+  color: var(--on-background);
+}
+
 #display-title {
-  display: inline;
+  display: block;
   font-size: 40px;
-  margin-top: 40px;
-  height: 40px;
-  overflow: hidden;
   max-width: 80vw;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#tag-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tag {
+  margin-right: 20px;
+}
+
+.tag-svg {
+  margin-right: 8px;
+  color: var(--on-background);
+  /* height: 24px;
+  width: auto; */
+}
+
+#preview-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+#preview-container #main-display-img {
+  width: min(40vw, 40vh);
+  height: min(40vw, 40vh);
+  object-fit: cover;
+  border-radius: 15px 15px 15px 15px;
+}
+
+#secondary-img-container {
+  display: flex;
+  flex-direction: row;
+  height: min(40vw, 40vh);
+}
+
+.secondary-col {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  justify-content: space-between;
+  height: 100%;
+  width: min(19vw, 19vh);
+  align-items: center;
+}
+
+.secondary-display-img {
+  width: calc((min(40vw, 40vh) - 20px) / 2);
+  height: calc((min(40vw, 40vh) - 20px) / 2);
+  object-fit: cover;
+  border-radius: 15px 15px 15px 15px;
+}
+
+#carousel-navigation {
+  align-items: center;
+}
+
+.display h2 {
+  font-weight: bold;
+  font-size: 24px;
 }
 
 #display-description {
   margin-top: 10px;
+  width: calc(min(80vw, 80vh) + 20px);
 }
 
 #demo {
