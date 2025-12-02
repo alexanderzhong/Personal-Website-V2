@@ -10,7 +10,6 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-        <Navbar />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/portfolio" component={Portfolio} />

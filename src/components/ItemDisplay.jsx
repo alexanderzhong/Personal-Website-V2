@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import "./display.css";
-import * as IoIcons from "react-icons/io5";
 import avodigyPreview from "../assets/img/AvodigyPreview.png";
 import scottyPreview from "../assets/img/scottypreview.png";
 import ajendaPreview from "../assets/img/AjendaPreview.png";
 import netbrainPreview from "../assets/img/NetBrainPreview.png";
 import cd39l3Preview from "../assets/img/cd39l3preview.png";
+import comingSoon from "../assets/img/coming_soon.png";
 import { COLORS } from "../assets/constants/colors.js";
 
-const imgs = {
-  0: avodigyPreview,
-  1: scottyPreview,
-  2: ajendaPreview,
-  3: netbrainPreview,
-  4: cd39l3Preview,
+// Map of image filenames to imported images
+const imageMap = {
+  "AvodigyPreview.png": avodigyPreview,
+  "scottypreview.png": scottyPreview,
+  "AjendaPreview.png": ajendaPreview,
+  "NetBrainPreview.png": netbrainPreview,
+  "cd39l3preview.png": cd39l3Preview,
 };
 
 export class ItemDisplay extends Component {
@@ -52,6 +53,50 @@ export class ItemDisplay extends Component {
     );
   }
 
+  getImageFromFilename(filename) {
+    // If image exists in imageMap, return it
+    if (imageMap[filename]) {
+      return imageMap[filename];
+    }
+    // Otherwise, try to require it dynamically
+    try {
+      return require(`../assets/img/${filename}`);
+    } catch (e) {
+      // If image can't be loaded, return coming_soon.png
+      return comingSoon;
+    }
+  }
+
+  getMainImage() {
+    const imageList = this.props.data.imageList || [];
+    // If imageList is empty, use coming_soon.png
+    if (imageList.length === 0) {
+      return comingSoon;
+    }
+    // Return the first image from imageList
+    return this.getImageFromFilename(imageList[0]);
+  }
+
+  getSecondaryImages() {
+    const imageList = this.props.data.imageList || [];
+    const secondaryImages = [];
+
+    // Start from index 1 (skip the first image which is the main image)
+    // We need 4 secondary images total (2 per column)
+    for (let i = 0; i < 4; i++) {
+      const imageIndex = i + 1; // Start from index 1
+      if (imageIndex < imageList.length) {
+        // If we have an image at this index, use it
+        secondaryImages.push(this.getImageFromFilename(imageList[imageIndex]));
+      } else {
+        // If no more images, use coming_soon.png
+        secondaryImages.push(comingSoon);
+      }
+    }
+
+    return secondaryImages;
+  }
+
   render() {
     return (
       <div className="display">
@@ -85,18 +130,34 @@ export class ItemDisplay extends Component {
         </div>
         <div id="preview-container">
           <img
-            src={imgs[this.props.data.id]}
+            src={this.getMainImage()}
             id="main-display-img"
             alt="display-image"
           />
           <div id="secondary-img-container">
             <div className="secondary-col">
-              {this.getSecondaryImage(imgs[this.props.data.id])}
-              {this.getSecondaryImage(imgs[this.props.data.id])}
+              {this.getSecondaryImages()
+                .slice(0, 2)
+                .map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    className="secondary-display-img"
+                    alt="display-image"
+                  />
+                ))}
             </div>
             <div className="secondary-col">
-              {this.getSecondaryImage(imgs[this.props.data.id])}
-              {this.getSecondaryImage(imgs[this.props.data.id])}
+              {this.getSecondaryImages()
+                .slice(2, 4)
+                .map((img, index) => (
+                  <img
+                    key={index + 2}
+                    src={img}
+                    className="secondary-display-img"
+                    alt="display-image"
+                  />
+                ))}
             </div>
           </div>
         </div>

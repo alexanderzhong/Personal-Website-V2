@@ -20,8 +20,9 @@ class Sidebar extends Component {
         <div
           className="modal-container"
           onClick={(e) => {
-            if (e.target.className === "modal-container")
+            if (e.target === e.currentTarget) {
               this.props.closeModal();
+            }
           }}
         >
           <nav
@@ -31,14 +32,20 @@ class Sidebar extends Component {
           >
             <ul className="nav-menu-items">
               <li className="navbar-toggle">
-                <Link to="#" className="menu-close">
+                <Link 
+                  to="#" 
+                  className="menu-close"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    this.props.closeModal();
+                  }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="50px"
                     width="50px"
                     viewBox="0 -960 960 960"
                     fill={COLORS.on_surface}
-                    onClick={this.props.closeModal}
                   >
                     <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
                   </svg>
@@ -49,7 +56,10 @@ class Sidebar extends Component {
                   <li key={index} className={item.cName}>
                     <Link
                       to={item.path}
-                      onClick={() => this.setState({ page: index })}
+                      onClick={() => {
+                        this.setState({ page: index });
+                        this.props.closeModal();
+                      }}
                     >
                       {/* {item.icon} */}
                       <span>{item.title}</span>

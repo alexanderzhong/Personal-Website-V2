@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./aboutMe.css";
-import profile from "../assets/img/profile_picture_cropped.png";
+import profile from "../assets/img/profile_picture.jpg";
 import resume from "../assets/documents/AlexanderZhongResume.pdf";
 
 class AboutMe extends Component {

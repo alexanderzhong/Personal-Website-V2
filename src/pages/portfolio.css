@@ -17,126 +17,122 @@
 @value --on-primary-container from "../App.css";
 @value --on-secondary-container from "../App.css";
 
+/* Page shell – same idea as Home/About: centered, fixed width */
 .portfolio {
-  display: block;
   background-color: var(--background);
-  min-height: 150vh;
+  min-height: calc(100vh - 80px);
+
+  max-width: 900px; /* horizontal centering shell */
+  margin: 40px auto 48px auto;
+  padding: 0 24px 40px;
+
+  display: block; /* no vertical centering */
 }
 
-/* .search-bar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 8vw;
-  margin-right: 8vw;
-  margin-bottom: 30px;
-  width: auto;
-  padding: 12px 10px 12px 10px;
-  background-color: var(--secondary-container);
-  border-radius: 5px 5px 5px 5px;
-} */
-
-/* .search-icon {
-  vertical-align: middle;
-  display: inline-block;
-  color: var(--on-background);
-} */
-
-/* Search bar css */
+/* Search bar inside the shell */
 .search-bar-input {
+  box-sizing: border-box;
   font-size: 20px;
   color: var(--on-background-variant);
-  vertical-align: middle;
-  display: inline-block;
+  display: block;
   cursor: text;
+
   background-image: url("../assets/img/search.svg");
   background-repeat: no-repeat;
-  border-radius: 5px 5px 5px 5px;
-  background-position: 10px 50%;
-  margin-left: 8vw;
-  margin-right: 8vw;
-  padding: 12px 10px 12px 40px;
-  width: calc(100% - 16vw);
-  border: 2px solid var(--background);
+  background-position: 12px 50%;
   background-color: var(--background-variant);
+
+  border-radius: 5px;
+  border: 2px solid var(--background);
+
+  padding: 10px 10px 10px 40px;
+  width: 100%; /* fill the 900px shell, not the viewport */
+  margin: 0 0 12px 0;
 }
 
 .search-bar-input:focus {
   border: 2px solid var(--primary);
   outline: none;
-  /* background-color: black; */
-  /* border: none; */
 }
 
-/* Dropdown menu */
-.sort-title {
-  font-size: 14px;
-  display: inline-block;
-  margin-right: 5px;
-  color: var(--on-background);
-}
-
-.dropdown {
-  display: inline-block;
-}
-
-#dropdown-stuff .dropdown-item {
-  color: #006064;
-}
-
-#dropdown-stuff .dropdown-item-active {
-  color: black;
-  font-weight: bold;
-}
-
-.sort-btn {
-  border: solid #e0e0e0;
-  background-color: #f8f8f8;
-  border-radius: 4px;
-  height: 32px;
-  width: 80px;
-  font-size: 14px;
-  z-index: -1;
-}
-
-.sort-by {
-  column-gap: 40px;
-  row-gap: 40px;
-  margin-left: 8vw;
-  margin-right: 8vw;
-  margin-bottom: 20px;
-}
-
-/* Filter Nodes */
+/* Filter chips row */
+/* Filter chips row */
 #filter-node-container {
-  margin: 10px 8vw 0px 8vw;
+  margin-top: 8px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
   height: fit-content;
 }
 
+/* Base chip */
 .filter-node {
-  font-size: 16px;
-  padding: 5px 20px 5px 20px;
-  border-radius: 20px;
-  background-color: var(--primary-container);
-  margin: none;
+  font-size: 0.85rem;
+  padding: 6px 16px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background-color: var(--surface);
+  color: var(--on-surface);
+
   cursor: pointer;
-  margin-right: 10px;
+  user-select: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    background-color 0.15s ease-out,
+    color 0.15s ease-out,
+    box-shadow 0.15s ease-out,
+    border-color 0.15s ease-out,
+    transform 0.1s ease-out;
 }
 
-.filter-node:focus {
-  background-color: var(--secondary-container);
+.filter-node:hover {
+  background-color: var(--primary-container);
+  border-color: rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
 }
 
+/* Active chip */
+.filter-node-active {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Keyboard focus (for accessibility) */
+.filter-node:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Optional heading */
 #head-title {
   display: block;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 16px auto;
 }
 
+/* Scoped hr if you use one on this page */
 hr {
-  margin-left: 8vw;
-  margin-right: 8vw;
+  margin: 24px 0 0 0;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile tweaks */
+@media only screen and (max-width: 800px) {
+  .portfolio {
+    padding: 0 16px 32px;
+    margin: 24px auto 32px auto;
+  }
+
+  .search-bar-input {
+    font-size: 18px;
+  }
 }

@@ -15,72 +15,115 @@
 @value --on-primary-container from "../App.css";
 @value --on-secondary-container from "../App.css";
 
+/* Card container */
 .element-container {
-  display: block;
-  background-color: var(--primary-container);
-  padding: 10px 5px;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-color: var(--surface);
+  color: var(--on-surface);
+
+  padding: 16px 18px;
+  border-radius: 16px;
+
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+
   transform-style: preserve-3d;
-  border-radius: 15px;
-  /* box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2); */
-  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  transition:
+    transform 0.14s ease-out,
+    box-shadow 0.14s ease-out,
+    border-color 0.14s ease-out,
+    background-color 0.14s ease-out;
 }
 
 .element-container:hover {
   cursor: pointer;
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.08);
+  background-color: var(--primary-container);
 }
 
+/* Top row: type dot + date */
 .element-top-row {
-  margin-left: 10px;
-  margin-right: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 8px;
 }
 
 .element-top-row label {
-  font-size: 18px;
+  font-size: 0.8rem;
+  color: var(--on-secondary-variant);
 }
 
+/* Small type dot */
 .type {
-  height: 20px;
-  width: 20px;
+  height: 10px;
+  width: 10px;
+  border-radius: 999px;
 }
 
 .type-Project {
-  background-color: red;
+  background-color: #ef4444; /* red-ish */
 }
 
 .type-Research {
-  background-color: green;
+  background-color: #22c55e; /* green-ish */
 }
 
 .type-Career {
-  background-color: purple;
+  background-color: #6366f1; /* indigo-ish */
 }
 
+/* Title */
 #ele-title {
-  font-size: 20px;
-  margin: 5px 10px;
-  margin-top: 40px;
+  font-size: 1rem;
+  margin: 4px 0 6px 0;
   font-weight: 600;
-  margin-left: 10px;
-  max-width: 60%;
+  line-height: 1.4;
+
+  max-width: 100%;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 2; /* 2-line clamp for consistent height */
   -webkit-box-orient: vertical;
-  line-clamp: 2;
 }
 
+/* Brief description */
 #brief {
-  font-size: 14px;
-  margin: 0px 10px;
-  margin-bottom: 50px;
-  width: 60%;
-  max-lines: 3;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 10px 0;
+  opacity: 0.9;
+
+  /* let it grow, but clamp to keep cards similar height */
+  flex-grow: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* cap to 3 lines */
+  -webkit-box-orient: vertical;
 }
 
+/* Bottom meta (type text) */
+#type {
+  font-size: 0.75rem;
+  margin: 0;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  color: var(--on-secondary-variant);
+}
+
+/* Legacy styles kept in case you re-enable them later */
 #divider {
   margin-left: 10px;
   margin-right: 10px;
@@ -95,18 +138,6 @@
   justify-content: space-between;
 }
 
-#type {
-  font-size: 14px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-weight: 600;
-  height: 16px;
-  width: 100px;
-  display: block;
-}
-
 #date {
   margin-left: 10px;
   margin-right: 10px;
@@ -119,8 +150,24 @@
   margin-right: 10px;
 }
 
+/* Preview image if you bring it back */
 #preview {
   width: 100%;
   height: auto;
   border-radius: 15px 15px 0px 0px;
+}
+
+/* Mobile tweaks */
+@media only screen and (max-width: 800px) {
+  .element-container {
+    padding: 14px 14px;
+  }
+
+  #ele-title {
+    font-size: 0.95rem;
+  }
+
+  #brief {
+    -webkit-line-clamp: 4;
+  }
 }

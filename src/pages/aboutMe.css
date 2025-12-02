@@ -1,86 +1,74 @@
 .home {
-  margin-top: 40px;
-  display: block;
-  /* background-color: #e3e3e3; */
-  margin-left: 8vw;
-  margin-right: 8vw;
-  margin-bottom: 40px;
+  margin: 40px auto;
+  max-width: 800px; /* similar to Home.jsx */
+  padding: 0 24px 40px;
   height: auto;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Optional title if you use .home-title somewhere */
 .home-title {
-  /* margin-left: 8vw;
-    margin-right: 8vw; */
   font-size: 50px;
   text-align: center;
 }
 
 .content {
-  text-align: center;
-  /* margin-left: 8vw;
-    margin-right: 8vw; */
   display: block;
   font-size: 1rem;
+  text-align: left; /* main text left-aligned like an article */
 }
 
+/* Divider */
 .home hr {
-  /* margin-left: 8vw;
-    margin-right: 8vw; */
-  /* margin-left: 10px; */
-  /* margin-right: 10px; */
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 40px;
+  margin: 40px 0 0 0;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* About */
-@media only screen and (max-width: 800px) {
-  .about-chunk {
-    display: block;
-    margin-top: 20px;
-  }
+/* -------- About section -------- */
 
-  #profile-picture {
-    overflow: hidden;
-    height: 50vw;
-    width: 50vw;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  #about-content {
-    display: block;
-    width: 84vw;
-    text-align: left;
-    margin-top: 20px;
-    /* margin-top: 4vw; */
-  }
+.about {
+  margin-top: 0;
 }
 
-@media only screen and (min-width: 800px) {
-  #profile-picture {
-    overflow: hidden;
-    height: 20vw;
-    width: 20vw;
-    display: block;
-  }
-
-  .about-chunk {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 20px;
-  }
-
-  #about-content {
-    display: inline-block;
-    width: 50vw;
-    /* margin-top: 4vw; */
-  }
+/* Always vertical: image on top, text below */
+.about-chunk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px; /* ⬅️ more breathing room between photo & text */
+  margin-top: 24px;
 }
 
-/* What's New */
+/* Profile picture – natural aspect ratio */
+#profile-picture {
+  display: block;
+  max-width: 220px;
+  width: 60%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* Wrapper around the text (your <div className="a">) */
+.about-chunk .a {
+  max-width: 640px; /* ⬅️ keep text in a nice column */
+  width: 100%;
+}
+
+/* Main about text */
+#about-content {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0 0 16px 0;
+}
+
+/* -------- What’s New section on About page (if used) -------- */
+
 .new {
   margin-top: 40px;
 }
@@ -88,7 +76,7 @@
 #patch-container {
   display: flex;
   justify-content: center;
-  max-width: 80vw;
+  max-width: 100%;
 }
 
 .subhead {
@@ -100,39 +88,75 @@
   text-align: left;
   display: block;
   width: 400px;
-  max-width: 80vw;
+  max-width: 100%;
 }
 
-/* Footer */
+/* -------- Footer -------- */
+
 #footer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  margin-top: 24px;
 }
 
 #footer h3 {
   font-size: 1.2rem;
+  margin: 0 0 8px 0;
 }
 
 #link-list {
-  orientation: vertical;
   display: block;
-  margin-right: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 #link-list a {
   display: block;
   font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  margin-bottom: 4px;
+}
+
+#link-list a:hover {
+  text-decoration: underline;
 }
 
 #links a {
   text-align: left;
 }
 
+.contact {
+  margin-left: 10px;
+}
+
 .contact p {
   text-align: left;
   font-size: 0.8rem;
+  margin: 0;
 }
 
-.contact {
-  margin-left: 10px;
+/* -------- Responsive tweaks -------- */
+
+@media only screen and (max-width: 800px) {
+  .home {
+    padding: 0 16px 32px;
+  }
+
+  #profile-picture {
+    width: 70%; /* a bit larger on small screens */
+    max-width: 260px;
+  }
+
+  #footer {
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .contact {
+    margin-left: 0;
+  }
 }

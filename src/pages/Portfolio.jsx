@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import Grid from "../components/Grid";
+import Grid from "../components/Grid.jsx";
 import ItemDisplay from "../components/ItemDisplay";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./portfolio.css";
-import { COLORS } from "../assets/constants/colors.js";
 import { PortfolioData } from "../components/PortfolioData.jsx";
 
 // 0 = internship, 1 = project, 2 = research
@@ -19,6 +18,7 @@ class Portfolio extends Component {
       ascending: true,
       mode: true,
       selected: 0,
+      selectedFilter: "All", // 👈 new
     };
 
     this.handleSelection = this.handleSelection.bind(this);
@@ -34,17 +34,35 @@ class Portfolio extends Component {
         data.title.toLowerCase().includes(value) ||
         data.brief.toLowerCase().includes(value),
     );
-    this.setState({ elements: filtered });
+    this.setState({ elements: filtered, selectedFilter: "All" });
   }
 
   filterByCategory(category) {
-    const filteredArray = PortfolioData.filter(
-      (item) => item.type === category,
-    );
+    // If clicking the same filter that's already active, unfilter (show all)
+    if (this.state.selectedFilter === category) {
+      this.setState({
+        elements: PortfolioData,
+        sortBy: 0,
+        sortingMethod: "Recent",
+        selectedFilter: "All",
+      });
+      return;
+    }
+
+    // Otherwise, apply the filter
+    let filteredArray;
+
+    if (category === "All") {
+      filteredArray = PortfolioData;
+    } else {
+      filteredArray = PortfolioData.filter((item) => item.type === category);
+    }
+
     this.setState({
       elements: filteredArray,
       sortBy: 0,
       sortingMethod: "Category",
+      selectedFilter: category, // 👈 track which one is active
     });
   }
 
@@ -160,10 +178,10 @@ class Portfolio extends Component {
   //   );
   // }
 
-  getFilterTagNode(type) {
+  getFilterTagNode(type, isActive) {
     return (
       <label
-        className="filter-node"
+        className={`filter-node ${isActive ? "filter-node-active" : ""}`}
         onClick={() => this.filterByCategory(type)}
       >
         {type}
@@ -183,7 +201,12 @@ class Portfolio extends Component {
             onChange={this.search}
           />
           <div id="filter-node-container">
-            {types.map((type) => this.getFilterTagNode(type))}
+            {types.map((type) =>
+              this.getFilterTagNode(
+                type,
+                this.state.selectedFilter === type, // 👈 active?
+              ),
+            )}
           </div>
           <Grid
             elements={this.state.elements}
@@ -192,14 +215,14 @@ class Portfolio extends Component {
         </div>
       );
     } else {
-      var currProj = this.state.elements[0];
-      for (var i = 0; i < this.state.elements.length; i++) {
+      let currProj = this.state.elements[0];
+      for (let i = 0; i < this.state.elements.length; i++) {
         if (this.state.elements[i].id === this.state.selected) {
           currProj = this.state.elements[i];
         }
       }
       return (
-        <div>
+        <div className="portfolio">
           <ItemDisplay data={currProj} onBack={this.handleReturn} />
         </div>
       );

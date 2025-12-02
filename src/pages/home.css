@@ -15,35 +15,49 @@
 @value --on-primary-container from "../App.css";
 @value --on-secondary-container from "../App.css";
 
+/* Centered column layout */
 .home-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 8vw;
-  margin-right: 8vw;
-  height: calc(100vh - 80px);
+  flex-direction: column;
+  align-items: stretch;
+
+  max-width: 900px; /* match Portfolio shell */
+  margin: 40px auto 48px auto; /* top/bottom breathing room */
+  padding: 0 24px 40px;
+  min-height: calc(100vh - 80px);
 }
 
+/* Title block */
 .title-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: calc(100vh - 80px);
+  align-items: flex-start; /* left-align on desktop */
+  gap: 12px;
 }
 
+/* Name */
 .title {
-  font-size: 8vh;
-  font-weight: bold;
-  line-height: 0.8;
+  font-size: clamp(2.4rem, 6vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  text-align: left;
+  color: var(--on-background);
+}
+
+/* Typewriter text */
+.typewriter {
+  text-align: left;
 }
 
 .typewriter h1 {
   overflow: hidden;
   border-right: 0.15em solid orange;
   white-space: nowrap;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   width: 0;
   animation: typing 2s steps(18, end) forwards;
+  margin: 0;
+  display: inline-block; /* 👈 add this */
 }
 
 /* The typing effect */
@@ -56,81 +70,141 @@
   }
 }
 
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: orange;
-  }
-}
-
+/* About Me button */
 #about-me-button {
+  margin-top: 16px;
   text-decoration: none;
-  color: var(--on-primary);
-  border-radius: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 18px;
+  border-radius: 999px;
+
   background-color: var(--primary-container);
-  padding: 5px 10px;
-  width: max-content;
+  color: var(--on-primary-container);
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  border: 1px solid transparent;
+  transition:
+    background-color 0.15s ease-out,
+    transform 0.12s ease-out,
+    box-shadow 0.15s ease-out,
+    border-color 0.15s ease-out;
 }
 
 #about-me-button:hover {
   background-color: var(--secondary-container);
+  border-color: rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
+/* “What’s New” section */
 .new-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 30%;
+  margin-top: 32px;
+  width: 100%;
   visibility: visible;
+  gap: 12px;
 }
 
 .new-heading {
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--on-secondary-variant);
 }
 
+/* Card grid */
 .new-section-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  margin-top: 20px;
-  column-gap: 10px;
-  row-gap: 10px;
-  /* margin-left: 8vw; */
-  /* margin-right: 8vw; */
-  margin-bottom: 20px;
-  /* width: 30%; */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 8px;
+  gap: 16px;
 }
 
+/* Card */
 .new-section-item {
-  height: 200px;
-  width: 100%;
-  display: block;
-  background-color: var(--primary-container);
-  padding: 10px 5px;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  transition:
+    transform 0.15s ease-out,
+    box-shadow 0.15s ease-out,
+    border-color 0.15s ease-out,
+    background-color 0.15s ease-out;
 }
 
+.new-section-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.08);
+  background-color: var(--primary-container);
+}
+
+/* Card title + description */
+.card-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0;
+  color: var(--on-secondary-variant);
+}
+
+.card-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Optional website log if you re-enable it */
 .website-log {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
+/* Mobile tweaks */
 @media only screen and (max-width: 800px) {
-  .new-section {
-    visibility: hidden;
+  .home-container {
+    margin: 24px auto 32px auto;
+    padding: 0 16px 32px;
+    min-height: auto;
   }
 
   .title-container {
-    margin-top: 20px;
-    flex-direction: column;
-    justify-content: start;
+    align-items: center;
+    text-align: center;
   }
 
-  .home-container {
-    flex-direction: column;
+  .title {
+    text-align: center;
+  }
+
+  .typewriter {
+    text-align: center;
+  }
+
+  #about-me-button {
+    align-self: center;
+  }
+
+  .new-section {
+    margin-top: 24px;
   }
 }

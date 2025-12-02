@@ -1,4 +1,4 @@
-import React, { useState, Component, useRef } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import "./Navbar.css";
@@ -21,14 +21,12 @@ class Navbar extends Component {
   }
 
   setModalOpen = (open) => {
-    console.log("Opening");
     this.setState({
       modalOpen: open,
     });
   };
 
   setPage = (page) => {
-    console.log("Setting page");
     this.setState({ page: page });
   };
 
@@ -36,41 +34,46 @@ class Navbar extends Component {
     return (
       <>
         <IconContext.Provider value={{ color: COLORS.on_background }}>
-          <div>
-            <Link to="#" className="menu-bars">
+          <header className="navbar-root">
+            {/* Mobile menu button */}
+            <button
+              className="menu-bars"
+              onClick={() => this.setModalOpen(true)}
+              aria-label="Open navigation menu"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                height="40px"
+                height="28px"
                 viewBox="0 -960 960 960"
-                width="40px"
+                width="28px"
                 fill={COLORS.on_surface}
-                onClick={() => this.setModalOpen(true)}
               >
                 <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
               </svg>
-            </Link>
-            <div className="navbar-container">
-              {/* <h1 id="page-name">{pageMap[this.state.page]}</h1> */}
+            </button>
+
+            {/* Desktop nav */}
+            <nav className="navbar-container">
               <div className="top-nav-container">
-                {SidebarData.map((item, index) => {
-                  return (
-                    <Link to={item.path} className="top-nav-option">
-                      {item.title}
-                    </Link>
-                  );
-                })}
+                {SidebarData.map((item, index) => (
+                  <Link key={index} to={item.path} className="top-nav-option">
+                    <span className="top-nav-label">{item.title}</span>
+                  </Link>
+                ))}
               </div>
-            </div>
-          </div>
+            </nav>
+          </header>
         </IconContext.Provider>
-        {createPortal(
-          <Sidebar
-            closeModal={() => this.setModalOpen(false)}
-            modalOpen={this.state.modalOpen}
-            setPage={this.setPage}
-          />,
-          document.body,
-        )}
+
+        {this.state.modalOpen &&
+          createPortal(
+            <Sidebar
+              closeModal={() => this.setModalOpen(false)}
+              modalOpen={this.state.modalOpen}
+              setPage={this.setPage}
+            />,
+            document.body,
+          )}
       </>
     );
   }

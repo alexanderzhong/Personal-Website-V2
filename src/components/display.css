@@ -15,108 +15,179 @@
 @value --on-primary-container from "../App.css";
 @value --on-secondary-container from "../App.css";
 
+/* ItemDisplay lives inside .portfolio and fills that shell */
 .display {
-  margin-left: max(8vw, 10px);
-  margin-right: max(8vw, 10px);
+  width: 100%;
+  margin-top: 24px;
 }
 
+/* Back pill button */
 #back {
-  display: block;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  display: inline-flex;
   align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
   cursor: pointer;
+
+  background-color: transparent;
+  transition:
+    background-color 0.15s ease-out,
+    transform 0.1s ease-out,
+    box-shadow 0.15s ease-out;
 }
 
-.icon,
-.tag-svg {
+#back:hover {
+  background-color: var(--surface);
+  transform: translateX(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.icon {
   vertical-align: middle;
   display: inline-block;
 }
 
-label {
+#back label {
   vertical-align: middle;
   display: inline-block;
   color: var(--on-background);
+  font-size: 0.85rem;
+  font-weight: 500;
 }
 
+/* Title + meta block */
 #display-title {
   display: block;
-  font-size: 40px;
-  max-width: 80vw;
-  text-wrap: nowrap;
+  font-size: 1.8rem;
+  font-weight: 600;
+  max-width: 100%;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 18px 0 8px 0;
+  color: var(--on-background);
 }
 
 #tag-container {
   display: flex;
   flex-direction: row;
-  text-align: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
+/* Tag chips */
 .tag {
-  margin-right: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  background-color: var(--surface);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .tag-svg {
-  margin-right: 8px;
   color: var(--on-background);
-  /* height: 24px;
-  width: auto; */
+  width: 18px;
+  height: 18px;
 }
 
+.tag label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--on-secondary-variant);
+}
+
+/* Preview images row */
 #preview-container {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   display: flex;
   flex-direction: row;
+  gap: 20px;
 }
 
+/* Main image */
 #preview-container #main-display-img {
-  width: min(40vw, 40vh);
-  height: min(40vw, 40vh);
+  width: 55%;
+  max-width: 460px;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: 15px 15px 15px 15px;
+  border-radius: 18px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
 }
 
+/* Secondary images block */
 #secondary-img-container {
   display: flex;
   flex-direction: row;
-  height: min(40vw, 40vh);
+  gap: 12px;
 }
 
 .secondary-col {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
-  justify-content: space-between;
-  height: 100%;
-  width: min(19vw, 19vh);
-  align-items: center;
+  gap: 12px;
 }
 
 .secondary-display-img {
-  width: calc((min(40vw, 40vh) - 20px) / 2);
-  height: calc((min(40vw, 40vh) - 20px) / 2);
+  width: 150px;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: 15px 15px 15px 15px;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
-#carousel-navigation {
-  align-items: center;
+/* Description section */
+#detail-container {
+  margin-top: 8px;
 }
 
 .display h2 {
-  font-weight: bold;
-  font-size: 24px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--on-background);
 }
 
 #display-description {
-  margin-top: 10px;
-  width: calc(min(80vw, 80vh) + 20px);
+  margin-top: 4px;
+  max-width: 100%;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--on-surface);
 }
 
+/* iframe demo if you re-enable it */
 #demo {
   margin-top: 10px;
+}
+
+/* Responsive tweaks */
+@media only screen and (max-width: 800px) {
+  #display-title {
+    font-size: 1.4rem;
+    white-space: normal; /* allow wrapping on small screens */
+  }
+
+  #preview-container {
+    flex-direction: column;
+  }
+
+  #preview-container #main-display-img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #secondary-img-container {
+    justify-content: flex-start;
+  }
+
+  .secondary-display-img {
+    width: 46%;
+  }
 }
