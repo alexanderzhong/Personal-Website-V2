@@ -1,35 +1,36 @@
 import React, { Component } from "react";
 import Grid from "../components/Grid.jsx";
 import ItemDisplay from "../components/ItemDisplay";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./portfolio.css";
 import { PortfolioData } from "../components/PortfolioData.jsx";
+import { SelectField } from "../components/ui";
 
-// 0 = internship, 1 = project, 2 = research
+const getRecentPortfolioData = (items = PortfolioData) =>
+  [...items].sort((a, b) => b.date - a.date);
 
 class Portfolio extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      elements: PortfolioData,
+      elements: getRecentPortfolioData(),
       sortBy: 0,
       sortingMethod: "Recent",
       ascending: true,
       mode: true,
       selected: 0,
-      selectedFilter: "All", // 👈 new
+      selectedFilter: "All",
     };
 
     this.handleSelection = this.handleSelection.bind(this);
     this.handleReturn = this.handleReturn.bind(this);
     this.search = this.search.bind(this);
+    this.filterByCategory = this.filterByCategory.bind(this);
   }
 
   search(e) {
     const value = e.target.value.toLowerCase();
-    console.log(value);
-    const filtered = PortfolioData.filter(
+    const filtered = getRecentPortfolioData().filter(
       (data) =>
         data.title.toLowerCase().includes(value) ||
         data.brief.toLowerCase().includes(value),
@@ -37,38 +38,24 @@ class Portfolio extends Component {
     this.setState({ elements: filtered, selectedFilter: "All" });
   }
 
-  filterByCategory(category) {
-    // If clicking the same filter that's already active, unfilter (show all)
-    if (this.state.selectedFilter === category) {
-      this.setState({
-        elements: PortfolioData,
-        sortBy: 0,
-        sortingMethod: "Recent",
-        selectedFilter: "All",
-      });
-      return;
-    }
-
-    // Otherwise, apply the filter
-    let filteredArray;
-
-    if (category === "All") {
-      filteredArray = PortfolioData;
-    } else {
-      filteredArray = PortfolioData.filter((item) => item.type === category);
-    }
+  filterByCategory(e) {
+    const nextFilter = e.target.value;
+    const filteredArray =
+      nextFilter === "All"
+        ? getRecentPortfolioData()
+        : getRecentPortfolioData().filter((item) => item.type === nextFilter);
 
     this.setState({
       elements: filteredArray,
       sortBy: 0,
-      sortingMethod: "Category",
-      selectedFilter: category, // 👈 track which one is active
+      sortingMethod: nextFilter === "All" ? "Recent" : "Category",
+      selectedFilter: nextFilter,
     });
   }
 
   sortData(num) {
-    const originalArray = PortfolioData;
-    var newArray = [1, 1, 1, 1, 1];
+    const originalArray = getRecentPortfolioData();
+    var newArray = originalArray;
     if (num === 0) {
       this.setState({
         elements: originalArray,
@@ -77,11 +64,9 @@ class Portfolio extends Component {
         ascending: this.state.ascending,
       });
     } else if (num === 1) {
-      newArray[0] = originalArray[2];
-      newArray[1] = originalArray[4];
-      newArray[2] = originalArray[3];
-      newArray[3] = originalArray[1];
-      newArray[4] = originalArray[0];
+      newArray = [...originalArray].sort((a, b) =>
+        a.title.localeCompare(b.title),
+      );
       this.setState({
         elements: newArray,
         sortBy: 1,
@@ -89,11 +74,9 @@ class Portfolio extends Component {
         ascending: this.state.ascending,
       });
     } else {
-      newArray[0] = originalArray[0];
-      newArray[1] = originalArray[3];
-      newArray[2] = originalArray[4];
-      newArray[3] = originalArray[1];
-      newArray[4] = originalArray[2];
+      newArray = [...originalArray].sort((a, b) =>
+        a.type.localeCompare(b.type),
+      );
       this.setState({
         elements: newArray,
         sortBy: 2,
@@ -104,129 +87,72 @@ class Portfolio extends Component {
   }
 
   handleSelection(index) {
-    this.setState({ mode: false, selected: index });
-    console.log("hello");
+    this.setState({ mode: false, selected: index }, () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    });
   }
 
   handleReturn() {
-    this.setState({ mode: true });
-  }
-
-  // getDropDownNode() {
-  //   return (
-  //     <div className="sort-by">
-  //       <h2 className="sort-title">SORT BY</h2>
-  //       <div className="dropdown">
-  //         <button
-  //           className="sort-btn dropdown-toggle"
-  //           type="button"
-  //           id="dropdownMenuButton"
-  //           data-toggle="dropdown"
-  //           aria-haspopup="true"
-  //           aria-expanded="false"
-  //         >
-  //           {this.state.sortingMethod}
-  //         </button>
-  //         <div
-  //           id="dropdown-stuff"
-  //           className="dropdown-menu"
-  //           aria-labelledby="dropdownMenuButton"
-  //         >
-  //           <a
-  //             className={
-  //               this.state.sortBy == 0
-  //                 ? "dropdown-item dropdown-item-active"
-  //                 : "dropdown-item"
-  //             }
-  //             href="#"
-  //             onClick={() => this.sortData(0)}
-  //           >
-  //             Recent
-  //           </a>
-  //           <a
-  //             className={
-  //               this.state.sortBy == 1
-  //                 ? "dropdown-item dropdown-item-active"
-  //                 : "dropdown-item"
-  //             }
-  //             href="#"
-  //             onClick={() => this.sortData(1)}
-  //           >
-  //             Name
-  //           </a>
-  //           <a
-  //             className={
-  //               this.state.sortBy == 2
-  //                 ? "dropdown-item dropdown-item-active"
-  //                 : "dropdown-item"
-  //             }
-  //             href="#"
-  //             onClick={() => this.sortData(2)}
-  //           >
-  //             Type
-  //           </a>
-  //           <div className="dropdown-divider"></div>
-  //           <a className="dropdown-item" href="#">
-  //             Ascending
-  //           </a>
-  //           <a className="dropdown-item" href="#">
-  //             Descending
-  //           </a>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  getFilterTagNode(type, isActive) {
-    return (
-      <label
-        className={`filter-node ${isActive ? "filter-node-active" : ""}`}
-        onClick={() => this.filterByCategory(type)}
-      >
-        {type}
-      </label>
-    );
+    this.setState({ mode: true }, () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    });
   }
 
   render() {
-    const types = ["Project", "Research", "Career"];
     if (this.state.mode) {
       return (
-        <div className="portfolio">
-          <input
-            type="text"
-            className="search-bar-input"
-            placeholder="Search all projects"
-            onChange={this.search}
-          />
-          <div id="filter-node-container">
-            {types.map((type) =>
-              this.getFilterTagNode(
-                type,
-                this.state.selectedFilter === type, // 👈 active?
-              ),
-            )}
+        <main className="page-shell portfolio">
+          <div className="page-header">
+            <p className="section-label">Selected Work</p>
+            <h1 className="quiet-title">
+              Projects, research, and product work.
+            </h1>
+            <p className="quiet-copy">
+              A curated index of engineering work across Google Payments,
+              AI-backed products, academic machine learning, and earlier
+              software projects.
+            </p>
+          </div>
+          <div className="portfolio-tools">
+            <input
+              type="text"
+              className="search-bar-input"
+              placeholder="Search work"
+              onChange={this.search}
+            />
+            <SelectField
+              label="Filter"
+              className="portfolio-filter"
+              hideLabel
+              value={this.state.selectedFilter}
+              onChange={this.filterByCategory}
+            >
+              <option value="All">All work</option>
+              <option value="Project">Projects</option>
+              <option value="Research">Research</option>
+              <option value="Career">Career</option>
+            </SelectField>
           </div>
           <Grid
             elements={this.state.elements}
             onSelect={this.handleSelection}
           />
-        </div>
-      );
-    } else {
-      let currProj = this.state.elements[0];
-      for (let i = 0; i < this.state.elements.length; i++) {
-        if (this.state.elements[i].id === this.state.selected) {
-          currProj = this.state.elements[i];
-        }
-      }
-      return (
-        <div className="portfolio">
-          <ItemDisplay data={currProj} onBack={this.handleReturn} />
-        </div>
+        </main>
       );
     }
+
+    let currProj = this.state.elements[0];
+    for (let i = 0; i < this.state.elements.length; i++) {
+      if (this.state.elements[i].id === this.state.selected) {
+        currProj = this.state.elements[i];
+      }
+    }
+
+    return (
+      <main className="page-shell portfolio">
+        <ItemDisplay data={currProj} onBack={this.handleReturn} />
+      </main>
+    );
   }
 }
 

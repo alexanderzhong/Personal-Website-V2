@@ -3,11 +3,11 @@ export const PortfolioData = [
     id: 0,
     title: "Software Engineering Intern at Avodigy",
     type: "Career",
-    brief: "Worked as a Android mobile developer for social media style app.",
+    brief: "Android and Firebase development for Eventpedia mobile workflows.",
     preview: "AvodigyPreview.png",
     imageList: ["AvodigyPreview.png"],
     description:
-      "During my sophomore year in college, I interned at a company called Avodigy. This cmopany creates applications that allow companies to manage and streamline their internal workflow. The product I worked on was called Eventpedia, which was an event and conferencing app. For this app, I developed front end UI to display post and feed information from Firebase Firestore and designed data models for feed, friend, and notification systems in Firebase Firestore to maximize efficiency and pricing.",
+      "At Avodigy, I worked on Eventpedia, an Android event and conferencing app. I built front-end UI for social feed and post surfaces, connected those flows to Firebase Firestore, and designed Firestore data models for feeds, friend relationships, and notifications with attention to query efficiency and cost.",
     date: 202005,
     location: "Remote/McLean, VA",
   },
@@ -19,7 +19,7 @@ export const PortfolioData = [
     preview: "scottypreview.png",
     imageList: ["scottypreview.png"],
     description:
-      "I built the app \"Scotty Security\" with some of my friends during TartanHacks (hackathon at CMU). We built it as a cross-platform app, using HTML, CSS, and Javascript to create the front end, and a website that allowed for simple server processing to build the backend. The idea came from one of the themes given in the hackathon, which was campus security. We figured that while there several security apps/websites that helped people stay safe, there wasn't one that had everything that a student would need. So, we came up with \"Scotty Security\", which is a all in one campus security app, with access to nearly all of the security resources at CMU, including CMU police department and a map of campus. The features of the app include location tracking, news notifications, an emergency whistle, audio recording, and a contacts list/page. We used Cordova and Node.js to build the app (in our presentation, we built it for android). We also used Google Maps API for location tracking, and we built a simple set of RESTful APIs to transfer location information. I built most of the front end, and the simpler functions of the app that didn't require backend usage, including the emergency whistle and the audio recording functionality. Since two of the people on my team were not familiar with front end development, I also taught and guided them through building some of the front end with HTML, CSS, and JS. I'm really proud of this project, not only because I contributed a lot to it and that we were able to make a successful final product in the 24 hours we were given, but also because I think that the team worked really well together and I'm proud of what we created as a group. By the way, I have included a video of a quick demonstration of our project. It's a bit rough, but it was nearly the deadline, and we needed to submit soon.",
+      "Scotty Security was a TartanHacks project focused on making CMU campus safety resources easier to access from one mobile app. Our team built a Cordova and Node.js prototype with location tracking, CMU police access, campus maps, news notifications, an emergency whistle, audio recording, and contacts. I led much of the front-end implementation and helped teammates ramp up on HTML, CSS, and JavaScript during the hackathon.",
     date: 202002,
     location: "Carnegie Mellon University",
   },
@@ -31,7 +31,7 @@ export const PortfolioData = [
     preview: "AjendaPreview.png",
     imageList: ["AjendaPreview.png"],
     description:
-      'I built "Ajenda" as a personal project of mine both initially as a small commercial product and as a way to get familiar with Android Studio and the android libraries/android app workflow. I decided to not to make it commerical because of marketability and revenue-model, but I still think it is a worthwhile idea with the right execution. "Ajenda" is a productivity app that optimizes scheduling by automatically placing events based on a variety of different factors, including weather and driving time. The idea is that the user can say something like "Schedule Workout Sessions for 5 times a week", and the app should be able to place workout events in your schedule in the best possible times. Currently, the app has full calendar functionality along with persistent data storage for events. Although the calendar seems to be the regular calendar UI component, it is actually a custom made UI component, and it can and will be changed in the future. The app also currently uses OpenWeatherMap API and Google Maps API to obtain weather and distance information.',
+      "Ajenda was a personal Android productivity app exploring automated scheduling. The app combined calendar functionality, persistent event storage, custom calendar UI work, weather data from OpenWeatherMap, and travel-time context from Google Maps. The core idea was to let users describe goals, such as recurring workouts, and have the app place those events at reasonable times based on constraints.",
     date: 201905,
     location: "Boston, MA",
   },
@@ -43,7 +43,7 @@ export const PortfolioData = [
     preview: "NetBrainPreview.png",
     imageList: ["NetBrainPreview.png"],
     description:
-      "During my freshman year, I interned at NetBrain Technologies, which is an entreprise software company whose product allows companies to manage their internal computer network. While I was there, I researched and implemented third-party integration with ServiceNow by building a POC web app using JavaScript. I also tested NetBrain RESTful APIs and confirmed their use cases by writing HTTP calls in Python using Python's requests library and also wrote scripts to extract and update network data using NetBrain's MongoDB database.",
+      "At NetBrain Technologies, I worked on API integration and network automation. I built a JavaScript proof of concept for ServiceNow integration, validated NetBrain REST API use cases with Python HTTP scripts, and wrote automation for extracting and updating network data in MongoDB.",
     date: 201905,
     location: "Burlington, MA",
   },
@@ -56,20 +56,109 @@ export const PortfolioData = [
     preview: "cd39l3preview.png",
     imageList: ["cd39l3preview.png"],
     description:
-      'I did a research project on the pancreatic protein CD39L3 during my junior year of highschool and the following summer (2017). I worked with Professor Simon Robson and his lab at Beth Israel Deaconess Medical Center, and they mentored and advised over the course of my project. To provide some background knowledge on CD39L3, it is a glycoprotein found in the pancreas that is involved with Purinergic Signaling. Specifically, it is an enzyme that catalyzes purine nucleotides such ATP and GTP, and plays a role in regulating their signaling function. CD39L3 is a glycoprotein, which means it contains carbohydrate structures attached to its polypeptide chain. My project focused mainly on these structures, and I created several glycoforms of the protein, where I removed various amounts of sugar from the protein. I then measured the activity of these forms, included a model for the protein structure, and analyzed the potential impacts of these new glycoforms. This is a very watered down explanation of the proejct, but more information can found in my research paper, which was published in the peer-reviewed journal "Purinergic Signaling" and will be linked below. I also submitted this to the Regeneron Science Talent Search and was a National Semifinalist.',
+      'I studied glycoforms of the pancreatic protein CD39L3 with Professor Simon Robson\'s lab at Beth Israel Deaconess Medical Center. The project focused on how carbohydrate structures attached to CD39L3 affect enzymatic activity in purinergic signaling. I created and analyzed multiple glycoforms, modeled structural implications, published the work as a first-author paper in "Purinergic Signaling," and was named a Regeneron Science Talent Search National Semifinalist.',
     date: 201702,
     location: "Harvard Medical School",
+  },
+  {
+    id: 8,
+    title: "Software Engineer at Google Payments",
+    type: "Career",
+    brief:
+      "Google Wallet and GPay engineering across Pix, recurring transactions, and product reliability.",
+    preview: "",
+    imageList: [],
+    description:
+      "At Google, I work on Google Payments and Google Wallet product systems. Recent work includes launching Pix bank balance support, improving Pix reliability through fallback and error-handling work, owning launch metrics and alerts, building recurring transaction management for GPay, and supporting compliance-oriented age restriction controls.",
+    highlights: [
+      "Launched Pix bank balance support and reliability improvements.",
+      "Owned launch metrics, alerting, and fallback behavior for production systems.",
+      "Built recurring transaction management and compliance-oriented controls.",
+    ],
+    stack: ["Java", "TypeScript", "Google Wallet", "GPay", "Pix"],
+    date: 202206,
+    location: "Mountain View, CA",
   },
   {
     id: 5,
     title: "Wanderform.com",
     type: "Project",
-    brief: "GPT-5 based travel planner web app using React, Express, Firebase",
+    brief:
+      "AI travel planner web app for generating and refining structured itineraries.",
+    preview: "WanderformTrips.png",
+    imageList: [
+      "WanderformTrips.png",
+      "WanderformCreatePlan.png",
+      "WanderformItinerary.png",
+    ],
+    description:
+      "I built Wanderform as an AI travel planner that turns trip constraints into structured, editable itineraries. The app uses React, Vite, Tailwind CSS, and shadcn/ui on the frontend, with Express, Firebase Auth, Firestore, and LLM APIs supporting user profiles, saved trips, itinerary generation, event-level editing, summaries, and trip refinement. It includes calendar, timeline, map, weather, and AI-edit preview workflows, with Jest and Supertest coverage around key backend behavior.",
+    highlights: [
+      "Built saved trips, itinerary generation, event editing, and trip refinement workflows.",
+      "Designed calendar, timeline, map, weather, and AI-edit preview surfaces.",
+      "Added Jest and Supertest coverage around key backend behavior.",
+    ],
+    stack: [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Express",
+      "Firebase Auth",
+      "Firestore",
+      "LLM APIs",
+    ],
+    date: 202506,
+    location: "Mountain View, CA",
+    links: [{ label: "Visit Wanderform", url: "https://wanderform.com" }],
+  },
+  {
+    id: 6,
+    title: "What Makes Games Popular?",
+    type: "Research",
+    brief:
+      "CS229 machine learning project predicting Steam game popularity from metadata and engagement signals.",
     preview: "",
     imageList: [],
     description:
-      "I created a travel planner web application using React for the frontend, Express for the backend, and Firebase for authentication and storage. The application allows for generation of plans after giving some inputs/restrictions. It also allows for editing and generation for specific events. The next step is semi-agentic behavior where users can ask it to perform larger scale changes. This was an experiment to learn about LLMs in implementation, and for this web app, I used GPT-5 mini as my model due to lower token cost and relatively uncomplicated tasks.",
+      "For Stanford CS229, I studied whether static Steam metadata can predict and explain video game popularity. The project combined a Kaggle Steam dataset with Steam Web API and SteamSpy data, then engineered a 513-dimensional feature space from genres, categories, platforms, languages, developers, publishers, pricing, achievements, descriptions, ownership, playtime, review sentiment, Metacritic scores, and discounts. We trained regularized linear regression and PyTorch neural network models on a composite popularity score, and used k-means and Gaussian Mixture Models to uncover interpretable game segments. The neural network modestly improved validation MSE over linear regression, while k-means with k=7 produced the clearest stable clusters and GMMs surfaced finer-grained but more overlapping niches.",
+    highlights: [
+      "Built a 513-dimensional feature set from Steam metadata and engagement signals.",
+      "Compared regularized linear regression and PyTorch neural network models.",
+      "Used k-means and Gaussian Mixture Models to identify interpretable game segments.",
+    ],
+    stack: ["Python", "PyTorch", "scikit-learn", "Steam API", "Clustering"],
     date: 202512,
-    location: "Mountain View, CA",
+    location: "Stanford University",
+    links: [
+      {
+        label: "Read final report",
+        document: "CS229ProjectFinalReport.pdf",
+      },
+    ],
+  },
+  {
+    id: 7,
+    title: "Beyond Full Fine-tuning",
+    type: "Research",
+    brief:
+      "CS224N project comparing GPT-2 full fine-tuning with PEFT methods across NLP tasks.",
+    preview: "",
+    imageList: [],
+    description:
+      "For Stanford CS224N, I helped study how GPT-2 adapts to sentiment classification, paraphrase detection, and sonnet generation under full fine-tuning and parameter-efficient fine-tuning methods. The project implemented and compared bottleneck adapters, LoRA, IA3, prefix tuning, UniPELT-style hybrids, synthetic data augmentation, and Direct Preference Optimization. Our results showed that adaptation is strongly task-dependent: full fine-tuning remained a reliable baseline, but PEFT methods often acted as structural regularizers, saving compute and outperforming full fine-tuning in data-scarce or structure-sensitive settings. The best validation results included 0.559 on SST-5, 0.984 on CFIMDB, 0.911 on paraphrase detection, and 42.62 chrF for sonnet generation.",
+    highlights: [
+      "Compared full fine-tuning with adapters, LoRA, IA3, prefix tuning, and UniPELT-style hybrids.",
+      "Evaluated adaptation across sentiment classification, paraphrase detection, and sonnet generation.",
+      "Found PEFT methods useful as structural regularizers in data-scarce settings.",
+    ],
+    stack: ["Python", "PyTorch", "GPT-2", "LoRA", "Adapters", "DPO"],
+    date: 202512,
+    location: "Stanford University",
+    links: [
+      {
+        label: "Read final report",
+        document: "CS224NFinalReport.pdf",
+      },
+    ],
   },
 ];

@@ -5,178 +5,157 @@ import scottyPreview from "../assets/img/scottypreview.png";
 import ajendaPreview from "../assets/img/AjendaPreview.png";
 import netbrainPreview from "../assets/img/NetBrainPreview.png";
 import cd39l3Preview from "../assets/img/cd39l3preview.png";
-import comingSoon from "../assets/img/coming_soon.png";
+import wanderformTrips from "../assets/img/WanderformTrips.png";
+import wanderformCreatePlan from "../assets/img/WanderformCreatePlan.png";
+import wanderformItinerary from "../assets/img/WanderformItinerary.png";
+import cs229Report from "../assets/documents/CS229ProjectFinalReport.pdf";
+import cs224nReport from "../assets/documents/CS224NFinalReport.pdf";
 import { COLORS } from "../assets/constants/colors.js";
+import { Badge, Button } from "./ui";
+import CaseStudyCarousel from "./CaseStudyCarousel.jsx";
 
-// Map of image filenames to imported images
 const imageMap = {
   "AvodigyPreview.png": avodigyPreview,
   "scottypreview.png": scottyPreview,
   "AjendaPreview.png": ajendaPreview,
   "NetBrainPreview.png": netbrainPreview,
   "cd39l3preview.png": cd39l3Preview,
+  "WanderformTrips.png": wanderformTrips,
+  "WanderformCreatePlan.png": wanderformCreatePlan,
+  "WanderformItinerary.png": wanderformItinerary,
+};
+
+const documentMap = {
+  "CS229ProjectFinalReport.pdf": cs229Report,
+  "CS224NFinalReport.pdf": cs224nReport,
 };
 
 export class ItemDisplay extends Component {
   getDate(num) {
-    var result = "";
-    var month = num % 100;
-    var year = Math.floor(num / 100);
-    if (month < 10) {
-      result += "0";
-    }
-    result = result + month.toString() + "/" + year.toString();
-    return result;
-  }
-
-  getSecondaryImage(url) {
-    return (
-      <img src={url} className="secondary-display-img" alt="display-image" />
-    );
-  }
-
-  getTagComponent(path, label) {
-    return (
-      <div className="tag">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 -960 960 960"
-          width="24px"
-          fill={COLORS.on_background}
-          className="tag-svg"
-        >
-          {path}
-        </svg>
-        <label>{label}</label>
-      </div>
-    );
+    const month = num % 100;
+    const year = Math.floor(num / 100);
+    return `${month < 10 ? "0" : ""}${month}/${year}`;
   }
 
   getImageFromFilename(filename) {
-    // If image exists in imageMap, return it
-    if (imageMap[filename]) {
-      return imageMap[filename];
-    }
-    // Otherwise, try to require it dynamically
-    try {
-      return require(`../assets/img/${filename}`);
-    } catch (e) {
-      // If image can't be loaded, return coming_soon.png
-      return comingSoon;
-    }
+    return imageMap[filename] || null;
   }
 
-  getMainImage() {
-    const imageList = this.props.data.imageList || [];
-    // If imageList is empty, use coming_soon.png
-    if (imageList.length === 0) {
-      return comingSoon;
-    }
-    // Return the first image from imageList
-    return this.getImageFromFilename(imageList[0]);
+  getImages() {
+    return (this.props.data.imageList || [])
+      .map((filename) => this.getImageFromFilename(filename))
+      .filter(Boolean);
   }
 
-  getSecondaryImages() {
-    const imageList = this.props.data.imageList || [];
-    const secondaryImages = [];
+  getProjectLink(link) {
+    const href = link.url || documentMap[link.document];
 
-    // Start from index 1 (skip the first image which is the main image)
-    // We need 4 secondary images total (2 per column)
-    for (let i = 0; i < 4; i++) {
-      const imageIndex = i + 1; // Start from index 1
-      if (imageIndex < imageList.length) {
-        // If we have an image at this index, use it
-        secondaryImages.push(this.getImageFromFilename(imageList[imageIndex]));
-      } else {
-        // If no more images, use coming_soon.png
-        secondaryImages.push(comingSoon);
-      }
+    if (!href) {
+      return null;
     }
 
-    return secondaryImages;
+    return (
+      <Button
+        as="a"
+        key={link.label}
+        variant="primary"
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {link.label}
+      </Button>
+    );
+  }
+
+  getProjectLinks() {
+    const links = this.props.data.links || [];
+
+    if (links.length === 0) {
+      return null;
+    }
+
+    return <div className="button-row">{links.map(this.getProjectLink)}</div>;
   }
 
   render() {
+    const { data } = this.props;
+    const images = this.getImages();
+    const projectLinks = this.getProjectLinks();
+
     return (
-      <div className="display">
-        <div id="back" onClick={this.props.onBack}>
+      <article className="case-study">
+        <Button
+          variant="ghost"
+          className="back-button"
+          onClick={this.props.onBack}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            height="24px"
+            height="20px"
             viewBox="0 -960 960 960"
-            width="24px"
-            fill="#5f6368"
-            className="icon"
+            width="20px"
+            fill={COLORS.icon_muted}
+            aria-hidden="true"
           >
             <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
           </svg>
-          <label style={{ cursor: "pointer" }}>Back</label>
-        </div>
-        <h1 id="display-title">{this.props.data.title}</h1>
-        <div id="tag-container">
-          {this.getTagComponent(
-            <path d="M480-120q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840q82 0 155.5 35T760-706v-94h80v240H600v-80h110q-41-56-101-88t-129-32q-117 0-198.5 81.5T200-480q0 117 81.5 198.5T480-200q105 0 183.5-68T756-440h82q-15 137-117.5 228.5T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z" />,
-            this.getDate(this.props.data.date),
-          )}
-          {this.getTagComponent(
-            <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />,
-            this.props.data.location,
-          )}
-          {this.getTagComponent(
-            <path d="M856-390 570-104q-12 12-27 18t-30 6q-15 0-30-6t-27-18L103-457q-11-11-17-25.5T80-513v-287q0-33 23.5-56.5T160-880h287q16 0 31 6.5t26 17.5l352 353q12 12 17.5 27t5.5 30q0 15-5.5 29.5T856-390ZM513-160l286-286-353-354H160v286l353 354ZM260-640q25 0 42.5-17.5T320-700q0-25-17.5-42.5T260-760q-25 0-42.5 17.5T200-700q0 25 17.5 42.5T260-640Zm220 160Z" />,
-            this.props.data.type,
-          )}
-        </div>
-        <div id="preview-container">
-          <img
-            src={this.getMainImage()}
-            id="main-display-img"
-            alt="display-image"
-          />
-          <div id="secondary-img-container">
-            <div className="secondary-col">
-              {this.getSecondaryImages()
-                .slice(0, 2)
-                .map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    className="secondary-display-img"
-                    alt="display-image"
-                  />
-                ))}
-            </div>
-            <div className="secondary-col">
-              {this.getSecondaryImages()
-                .slice(2, 4)
-                .map((img, index) => (
-                  <img
-                    key={index + 2}
-                    src={img}
-                    className="secondary-display-img"
-                    alt="display-image"
-                  />
-                ))}
-            </div>
+          Back
+        </Button>
+
+        <header className="case-study-header">
+          <div>
+            <p className="section-label">{data.type}</p>
+            <h1>{data.title}</h1>
           </div>
+          <div className="case-study-meta">
+            <span>{this.getDate(data.date)}</span>
+            <span>{data.location}</span>
+          </div>
+        </header>
+
+        {images.length > 0 && (
+          <CaseStudyCarousel key={data.id} images={images} title={data.title} />
+        )}
+
+        <div className="case-study-content">
+          <section>
+            <h2>Overview</h2>
+            <p>{data.description}</p>
+          </section>
+
+          {projectLinks && (
+            <section className="case-study-resources">
+              <h2>Resources</h2>
+              {projectLinks}
+            </section>
+          )}
+
+          {data.highlights && (
+            <section>
+              <h2>Highlights</h2>
+              <ul className="case-study-list">
+                {data.highlights.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {data.stack && (
+            <section>
+              <h2>Stack</h2>
+              <div className="stack-list">
+                {data.stack.map((item) => (
+                  <Badge key={item} variant="muted">
+                    {item}
+                  </Badge>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
-        <div id="detail-container">
-          <h2>Description</h2>
-          <p id="display-description">{this.props.data.description}</p>
-        </div>
-        {/* <center>
-            <iframe
-              id="demo"
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/qkdmO3_Z-Rs"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </center> */}
-      </div>
+      </article>
     );
   }
 }

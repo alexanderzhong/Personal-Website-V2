@@ -21,6 +21,7 @@ class Grid extends Component {
 // PropTypes
 Grid.propTypes = {
   elements: PropTypes.array.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
 export default Grid;

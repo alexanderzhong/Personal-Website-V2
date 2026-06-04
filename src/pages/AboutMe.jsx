@@ -2,79 +2,115 @@ import React, { Component } from "react";
 import "./aboutMe.css";
 import profile from "../assets/img/profile_picture.jpg";
 import resume from "../assets/documents/AlexanderZhongResume.pdf";
+import { Card, CardContent } from "../components/ui";
+
+const connectLinks = [
+  {
+    label: "GitHub",
+    href: "https://github.com/alexanderzhong",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/alexander-zhong-331b79173/",
+  },
+  {
+    label: "Resume",
+    href: resume,
+  },
+  {
+    label: "Email",
+    href: "mailto:alexhyzhong@gmail.com",
+  },
+  {
+    label: "Alumni Email",
+    href: "mailto:azhong@alumni.cmu.edu",
+  },
+];
+
+const ArrowIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M7 17 17 7" />
+    <path d="M7 7h10v10" />
+  </svg>
+);
 
 class AboutMe extends Component {
   render() {
     return (
-      <div className="home">
-        {/* <title>Alexander Zhong</title> */}
-        <div className="content">
-          <br />
-          <div className="about">
-            <div className="about-chunk">
-              <img src={profile} id="profile-picture" alt="profile" />
-              <div className="a">
-                <p id="about-content">
-                  Hi, I'm Alex, a software engineer working at Google. I
-                  graduated from Carnegie Mellon University in 2022, majoring in
-                  computer science with a double major in mathematical sciences.
-                  In addition to my computer science experience, I have had a
-                  significant amount of biomedical research experience as well,
-                  after interning at Harvard Medical School and publishing a
-                  first author research paper about the pancreatic protein
-                  CD39L3.
-                  <br />
-                  <br />
-                  In terms of programming experience, my strongest language is
-                  Java with Python coming close in second. However, I have
-                  worked with several other programming languages/frameworks
-                  over the years, including C, JS, HTML, CSS, SML (academic
-                  functional programming language), Node.js, Golang, and React.
-                  I am very interested in new technologies, particularly machine
-                  learning and artificial intelligence, and I hope to do
-                  research in these fields during the upcoming semester.
-                  <br />
-                  <br />
-                  Outside of professional/academic work, I have a strong
-                  interest in music; I have been playing piano since I was 3
-                  years old, and I've played violin for about 12 years.
-                  Currently, there are no recordings on my website, but I will
-                  likely upload some to the portfolio page.
-                </p>
-              </div>
-            </div>
-          </div>
-          <br />
-          {/* <div className="contact">
-                    <h2>Contact</h2>
-                    <p>
-                        If you wish to contact me for progressional reason, the best method is through emailing me at azhong@andrew.cmu.edu.
-                    </p>
-                </div> */}
-          {/* <br/> */}
-        </div>
-        <hr />
-        <div id="footer">
-          <div id="links">
-            <h3>Links</h3>
-            <ul id="link-list">
-              <a href="https://github.com/alexanderzhong">GitHub</a>
-              <a href="https://www.linkedin.com/in/alexander-zhong-331b79173/">
-                LinkedIn
-              </a>
-              <a href={resume}>Resume</a>
-            </ul>
-          </div>
-          <div className="contact">
-            <h3>Contact</h3>
+      <main className="page-shell about-page">
+        <section className="about-intro">
+          <img
+            src={profile}
+            className="about-photo"
+            alt="Alexander Zhong portrait"
+          />
+          <div className="about-copy">
+            <p className="section-label">About</p>
+            <h1>Engineer, product builder, and musician.</h1>
             <p>
-              Email: alexhyzhong@gmail.com or azhong@alumni.cmu.edu <br />
-              Mailing Address: 5032 FORBES AVENUE, SMC 3414, PITTSBURGH, PA
-              15289
+              Hi, I&apos;m Alex, a software engineer at Google working in
+              Payments and Google Wallet. I graduated from Carnegie Mellon
+              University in 2022 with a B.S. in Computer Science and an
+              additional major in Mathematical Sciences, and I am currently
+              pursuing a Stanford Graduate Certificate in Artificial
+              Intelligence.
+            </p>
+            <p>
+              My recent work sits at the intersection of product engineering,
+              reliability, and applied AI. Professionally, I have worked on
+              GPay, Wallet, Pix, transaction management, and compliance-oriented
+              product systems. Outside of work, I have been building
+              Wanderform.com, an LLM-backed travel planner, and exploring
+              machine learning and NLP through Stanford CS229 and CS224N
+              research projects.
+            </p>
+            <p>
+              I also have a long-running love of music. I started piano when I
+              was 3, played violin for about 12 years, and still spend time with
+              classical piano, jazz piano, and improvisation.
             </p>
           </div>
-        </div>
-      </div>
+        </section>
+
+        <Card as="section" className="about-links">
+          <CardContent className="about-links-content">
+            <div className="about-links-heading">
+              <p className="section-label">Connect with me</p>
+              <p>Find my work, background, or reach me directly.</p>
+            </div>
+
+            <div className="about-connect-list">
+              {connectLinks.map((link) => (
+                <a
+                  className="about-connect-link"
+                  href={link.href}
+                  key={link.label}
+                  target={
+                    link.href.startsWith("mailto:") ? undefined : "_blank"
+                  }
+                  rel={
+                    link.href.startsWith("mailto:") ? undefined : "noreferrer"
+                  }
+                >
+                  <span>{link.label}</span>
+                  <ArrowIcon />
+                </a>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </main>
     );
   }
 }

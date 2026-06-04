@@ -1,93 +1,138 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
+import { Badge, Button, Card, CardContent } from "../components/ui";
 
-const ROLE_TITLES = [
-  "Software engineer.",
-  "Web designer.",
-  "Musician.",
-  "Student.",
+const focusItems = [
+  {
+    title: "Google Payments",
+    description:
+      "Reliability, launch readiness, and product systems across Wallet, GPay, and Pix.",
+  },
+  {
+    title: "Wanderform",
+    description:
+      "A travel planning workspace for turning loose ideas into editable itineraries.",
+  },
 ];
 
+const capabilities = [
+  {
+    title: "Product Engineering",
+    description:
+      "Building reliable user-facing systems with careful attention to launches, metrics, alerts, and long-term maintainability.",
+  },
+  {
+    title: "Applied AI",
+    description:
+      "Turning LLM and machine learning ideas into practical workflows, from trip planning agents to academic NLP experiments.",
+  },
+  {
+    title: "Research",
+    description:
+      "Exploring ML/NLP through Stanford CS229 and CS224N projects on popularity prediction, clustering, GPT-2 adaptation, and PEFT.",
+  },
+];
+
+const wanderformTags = ["React", "Vite", "Firebase", "LLM APIs"];
+
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      roleIndex: 0,
-    };
-  }
-
-  componentDidMount() {
-    // change role every 3.5 seconds (2s typing + ~1.5s pause)
-    this.roleInterval = setInterval(() => {
-      this.setState((prev) => ({
-        roleIndex: (prev.roleIndex + 1) % ROLE_TITLES.length,
-      }));
-    }, 3500);
-  }
-
-  componentWillUnmount() {
-    if (this.roleInterval) {
-      clearInterval(this.roleInterval);
-    }
-  }
-
   render() {
-    const currentRole = ROLE_TITLES[this.state.roleIndex];
-
     return (
-      <div className="home-container">
-        <div className="title-container">
-          <div className="title">Alexander Zhong</div>
-
-          <div className="typewriter">
-            {/* key forces the DOM node to remount so the CSS animation restarts */}
-            <h1 key={this.state.roleIndex}>{currentRole}</h1>
-          </div>
-
-          <Link to="/aboutme" id="about-me-button">
-            About Me
-          </Link>
-        </div>
-
-        <div className="new-section">
-          <div className="new-heading">What’s New</div>
-          <div className="new-section-grid">
-            <div className="new-section-item">
-              <h3 className="card-title">Job Updates</h3>
-              <p className="card-description">
-                I&apos;m currently a software engineer in the Google Payments
-                organization, working on Google Wallet and Pix integration.
-              </p>
-            </div>
-
-            <div className="new-section-item">
-              <h3 className="card-title">Project Updates</h3>
-              <p className="card-description">
-                I&apos;m building Wanderform, an AI-powered travel planner.
-                I&apos;m iterating on the planner, editor, and agentic flow—
-                more demos and polish coming soon.
-              </p>
-            </div>
-
-            <div className="new-section-item">
-              <h3 className="card-title">Music</h3>
-              <p className="card-description">
-                I&apos;m practicing jazz piano and improvisation, while still
-                keeping up with classical piano and violin.
-              </p>
-            </div>
-
-            <div className="new-section-item">
-              <h3 className="card-title">Website</h3>
-              <p className="card-description">
-                I&apos;m refreshing this site with new writing, projects, and
-                design tweaks. Expect more updates over the next few weeks.
-              </p>
+      <main className="page-shell home-page">
+        <section className="home-hero">
+          <div className="home-hero-copy">
+            <p className="section-label">Software engineer at Google</p>
+            <h1 className="quiet-title">Alexander Zhong</h1>
+            <p className="home-hero-kicker">
+              I build payments systems, practical AI tools, and the occasional
+              thing that starts as a late-night curiosity.
+            </p>
+            <p className="quiet-copy">
+              Recent work spans Google Wallet, Pix reliability, Wanderform, and
+              Stanford ML/NLP research. Outside the code, I still make time for
+              piano, violin, and small experiments that keep engineering from
+              feeling too sterile.
+            </p>
+            <div className="button-row">
+              <Button as={Link} to="/portfolio" variant="primary">
+                View Work
+              </Button>
+              <Button as={Link} to="/aboutme">
+                About Me
+              </Button>
             </div>
           </div>
-        </div>
-      </div>
+
+          <Card className="home-focus-card">
+            <CardContent className="home-focus-content">
+              <p className="section-label">Lately</p>
+              <div className="home-focus-list">
+                {focusItems.map((item) => (
+                  <div className="home-focus-item" key={item.title}>
+                    <h2>{item.title}</h2>
+                    <p>{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        <Card
+          as="section"
+          className="home-feature-card"
+          aria-labelledby="wanderform-heading"
+        >
+          <CardContent className="home-feature-content">
+            <div className="home-feature-copy">
+              <p className="section-label">Project Spotlight</p>
+              <h2 id="wanderform-heading">Wanderform</h2>
+              <p>
+                A travel planning workspace for generating, editing, and saving
+                structured itineraries from natural-language trip constraints.
+              </p>
+              <div className="home-feature-tags">
+                {wanderformTags.map((tag) => (
+                  <Badge key={tag} variant="muted">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+            <div className="button-row home-feature-actions">
+              <Button
+                as="a"
+                href="https://wanderform.com"
+                variant="primary"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Visit Site
+              </Button>
+              <Button as={Link} to="/portfolio">
+                Case Study
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <section className="home-capabilities" aria-labelledby="work-heading">
+          <div className="section-heading-row">
+            <p className="section-label" id="work-heading">
+              What I Work On
+            </p>
+          </div>
+          <div className="capability-list">
+            {capabilities.map((item) => (
+              <article className="capability-item" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </main>
     );
   }
 }

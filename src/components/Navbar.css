@@ -1,82 +1,62 @@
-@value --primary from "../App.css";
-@value --primary-variant from "../App.css";
-@value --secondary from "../App.css";
-@value --secondary-variant from "../App.css";
-@value --background from "../App.css";
-@value --surface from "../App.css";
-@value --on-primary from "../App.css";
-@value --on-primary-variant from "../App.css";
-@value --on-secondary from "../App.css";
-@value --on-secondary-variant from "../App.css";
-@value --on-background from "../App.css";
-@value --on-surface from "../App.css";
-@value --primary-container from "../App.css";
-@value --secondary-container from "../App.css";
-@value --on-primary-container from "../App.css";
-@value --on-secondary-container from "../App.css";
-
-/* Root bar: full-width top strip */
 .navbar-root {
   position: sticky;
   top: 0;
   z-index: 20;
-
   width: 100%;
   background-color: var(--background);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(var(--black-rgb), 0.06);
 }
 
-/* Desktop nav container – horizontally centered */
 .navbar-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  height: 80px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
+  max-width: 1000px;
+  height: 72px;
+  margin: 0 auto;
   padding: 0 24px;
 }
 
-/* Top nav links */
+.mobile-navbar-content {
+  display: none;
+}
+
+.mobile-navbar-brand {
+  color: var(--on-background);
+  text-decoration: none;
+}
+
 .top-nav-container {
   display: flex;
   flex-direction: row;
   gap: 24px;
 }
 
-/* Single nav item */
 .top-nav-option {
-  text-decoration: none;
-  color: var(--on-background);
-  list-style-type: none;
   display: block;
+  color: var(--on-background);
+  text-decoration: none;
+  list-style-type: none;
 }
 
-/* Label with underline animation */
 .top-nav-label {
   position: relative;
   display: inline-block;
+  padding: 4px 0;
   font-size: 0.95rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 4px 0;
 }
 
-/* Underline effect */
 .top-nav-label::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: -2px;
-
   width: 100%;
   height: 2px;
   background-color: var(--on-background);
-
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.18s ease-out;
@@ -87,66 +67,52 @@
   transform: scaleX(1);
 }
 
-/* Mobile menu (hamburger) */
 .menu-bars {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-
-  display: none; /* hidden on desktop */
-
+  display: none;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
   padding: 8px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(0, 0, 0, 0.04);
+  border-radius: var(--radius-md);
   color: var(--on-background);
-
-  cursor: pointer;
-
-  z-index: 30;
-  transition:
-    background-color 0.15s ease-out,
-    transform 0.1s ease-out,
-    box-shadow 0.15s ease-out;
 }
 
-.menu-bars:hover {
-  background-color: rgba(0, 0, 0, 0.08);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-}
-
-.menu-bars:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-/* Modal overlay (used by Sidebar) */
-.modal-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Page title (if you ever re-enable it) */
 #page-name {
-  color: var(--on-background);
   position: absolute;
   left: 50%;
+  color: var(--on-background);
   transform: translateX(-50%);
 }
 
-/* Mobile behavior */
 @media screen and (max-width: 800px) {
+  .navbar-root {
+    min-height: 64px;
+  }
+
+  .mobile-navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 0 16px;
+  }
+
+  .mobile-navbar-brand {
+    font-size: 0.92rem;
+    font-weight: 750;
+    letter-spacing: 0.02em;
+  }
+
+  .mobile-navbar-brand:hover {
+    color: var(--on-background);
+    text-decoration: none;
+  }
+
   .menu-bars {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .navbar-container {
-    display: none; /* hide desktop links on mobile */
+    display: none;
   }
 }

@@ -1,162 +1,146 @@
-.home {
-  margin: 40px auto;
-  max-width: 800px; /* similar to Home.jsx */
-  padding: 0 24px 40px;
-  height: auto;
+.about-page {
   display: flex;
   flex-direction: column;
+  gap: 30px;
 }
 
-/* Optional title if you use .home-title somewhere */
-.home-title {
-  font-size: 50px;
-  text-align: center;
+.about-intro {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
 }
 
-.content {
-  display: block;
-  font-size: 1rem;
-  text-align: left; /* main text left-aligned like an article */
-}
-
-/* Divider */
-.home hr {
-  margin: 40px 0 0 0;
-  border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* -------- About section -------- */
-
-.about {
-  margin-top: 0;
-}
-
-/* Always vertical: image on top, text below */
-.about-chunk {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px; /* ⬅️ more breathing room between photo & text */
-  margin-top: 24px;
-}
-
-/* Profile picture – natural aspect ratio */
-#profile-picture {
-  display: block;
-  max-width: 220px;
-  width: 60%;
-  height: auto;
-  border-radius: 16px;
+.about-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
   object-fit: cover;
+  filter: saturate(0.95);
 }
 
-/* Wrapper around the text (your <div className="a">) */
-.about-chunk .a {
-  max-width: 640px; /* ⬅️ keep text in a nice column */
-  width: 100%;
+.about-copy {
+  max-width: 680px;
 }
 
-/* Main about text */
-#about-content {
-  display: block;
-  width: 100%;
-  text-align: left;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  margin: 0 0 16px 0;
+.about-copy h1 {
+  margin: 6px 0 18px;
+  color: var(--on-background);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 740;
+  line-height: 1.08;
 }
 
-/* -------- What’s New section on About page (if used) -------- */
-
-.new {
-  margin-top: 40px;
+.about-copy p:not(.section-label) {
+  margin: 0 0 15px;
+  color: var(--on-background-variant);
+  font-size: 0.98rem;
+  line-height: 1.78;
 }
 
-#patch-container {
+.about-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.about-links {
+  max-width: 680px;
+  margin-left: 268px;
+}
+
+.about-links-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.about-links-heading p:not(.section-label) {
+  margin: 0;
+  color: var(--on-background-variant);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.about-links-content {
   display: flex;
-  justify-content: center;
-  max-width: 100%;
-}
-
-.subhead {
-  font-size: 18px;
-  font-style: italic;
-}
-
-.patch-notes {
-  text-align: left;
-  display: block;
-  width: 400px;
-  max-width: 100%;
-}
-
-/* -------- Footer -------- */
-
-#footer {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 32px;
-  margin-top: 24px;
+  gap: 18px;
+  padding: 16px 18px;
 }
 
-#footer h3 {
-  font-size: 1.2rem;
-  margin: 0 0 8px 0;
+.about-connect-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
-#link-list {
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-
-#link-list a {
-  display: block;
-  font-size: 14px;
-  text-align: left;
+.about-connect-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--on-background);
+  font-size: 0.84rem;
+  font-weight: 650;
+  line-height: 1.2;
   text-decoration: none;
-  margin-bottom: 4px;
+  transition:
+    border-color 0.15s ease-out,
+    background-color 0.15s ease-out,
+    color 0.15s ease-out;
 }
 
-#link-list a:hover {
-  text-decoration: underline;
+.about-connect-link svg {
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+  color: var(--on-background-variant);
 }
 
-#links a {
-  text-align: left;
+.about-connect-link:hover {
+  border-color: var(--border-strong);
+  background-color: var(--surface-subtle);
+  color: var(--primary-variant);
+  text-decoration: none;
 }
 
-.contact {
-  margin-left: 10px;
+.about-connect-link:hover svg {
+  color: var(--primary-variant);
 }
 
-.contact p {
-  text-align: left;
-  font-size: 0.8rem;
-  margin: 0;
+.about-connect-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
-
-/* -------- Responsive tweaks -------- */
 
 @media only screen and (max-width: 800px) {
-  .home {
-    padding: 0 16px 32px;
+  .about-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
   }
 
-  #profile-picture {
-    width: 70%; /* a bit larger on small screens */
-    max-width: 260px;
+  .about-photo {
+    width: min(220px, 72vw);
+    margin: 0 auto;
   }
 
-  #footer {
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 24px;
-  }
-
-  .contact {
+  .about-links {
+    max-width: none;
     margin-left: 0;
+    text-align: left;
+  }
+
+  .about-links-content {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .about-connect-list {
+    justify-content: flex-start;
   }
 }

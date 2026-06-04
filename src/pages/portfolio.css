@@ -1,138 +1,89 @@
-@value --primary from "../App.css";
-@value --primary-variant from "../App.css";
-@value --secondary from "../App.css";
-@value --secondary-variant from "../App.css";
-@value --background from "../App.css";
-@value --background-variant from "../App.css";
-@value --surface from "../App.css";
-@value --on-primary from "../App.css";
-@value --on-primary-variant from "../App.css";
-@value --on-secondary from "../App.css";
-@value --on-secondary-variant from "../App.css";
-@value --on-background from "../App.css";
-@value --on-background-variant from "../App.css";
-@value --on-surface from "../App.css";
-@value --primary-container from "../App.css";
-@value --secondary-container from "../App.css";
-@value --on-primary-container from "../App.css";
-@value --on-secondary-container from "../App.css";
-
-/* Page shell – same idea as Home/About: centered, fixed width */
 .portfolio {
-  background-color: var(--background);
-  min-height: calc(100vh - 80px);
-
-  max-width: 900px; /* horizontal centering shell */
-  margin: 40px auto 48px auto;
-  padding: 0 24px 40px;
-
-  display: block; /* no vertical centering */
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
 }
 
-/* Search bar inside the shell */
+.portfolio-tools {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 132px;
+  gap: 10px;
+  align-items: end;
+  padding-top: 4px;
+}
+
+.portfolio-filter {
+  width: 132px;
+}
+
+.portfolio-filter .ui-select {
+  min-height: 42px;
+  padding: 8px 30px 8px 11px;
+  font-size: 0.86rem;
+}
+
+.portfolio-filter .ui-select-chevron {
+  right: 10px;
+  width: 14px;
+  height: 14px;
+}
+
 .search-bar-input {
   box-sizing: border-box;
-  font-size: 20px;
-  color: var(--on-background-variant);
   display: block;
-  cursor: text;
-
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px 10px 40px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
   background-image: url("../assets/img/search.svg");
-  background-repeat: no-repeat;
   background-position: 12px 50%;
-  background-color: var(--background-variant);
+  background-repeat: no-repeat;
+  color: var(--on-background);
+  cursor: text;
+  font-size: 0.95rem;
+}
 
-  border-radius: 5px;
-  border: 2px solid var(--background);
-
-  padding: 10px 10px 10px 40px;
-  width: 100%; /* fill the 900px shell, not the viewport */
-  margin: 0 0 12px 0;
+.search-bar-input::placeholder {
+  color: var(--on-background-variant);
 }
 
 .search-bar-input:focus {
-  border: 2px solid var(--primary);
-  outline: none;
-}
-
-/* Filter chips row */
-/* Filter chips row */
-#filter-node-container {
-  margin-top: 8px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 8px;
-  height: fit-content;
-}
-
-/* Base chip */
-.filter-node {
-  font-size: 0.85rem;
-  padding: 6px 16px;
-  border-radius: 999px;
-
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  background-color: var(--surface);
-  color: var(--on-surface);
-
-  cursor: pointer;
-  user-select: none;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  transition:
-    background-color 0.15s ease-out,
-    color 0.15s ease-out,
-    box-shadow 0.15s ease-out,
-    border-color 0.15s ease-out,
-    transform 0.1s ease-out;
-}
-
-.filter-node:hover {
-  background-color: var(--primary-container);
-  border-color: rgba(0, 0, 0, 0.08);
-  transform: translateY(-1px);
-}
-
-/* Active chip */
-.filter-node-active {
-  background-color: var(--primary);
-  color: var(--on-primary);
   border-color: var(--primary);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
 }
 
-/* Keyboard focus (for accessibility) */
-.filter-node:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-/* Optional heading */
-#head-title {
-  display: block;
-  text-align: center;
-  margin: 0 auto 16px auto;
-}
-
-/* Scoped hr if you use one on this page */
-hr {
-  margin: 24px 0 0 0;
-  border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Mobile tweaks */
 @media only screen and (max-width: 800px) {
   .portfolio {
-    padding: 0 16px 32px;
-    margin: 24px auto 32px auto;
+    gap: 22px;
   }
 
-  .search-bar-input {
-    font-size: 18px;
+  .portfolio-tools {
+    grid-template-columns: minmax(0, 1fr) 118px;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .portfolio-filter {
+    width: 118px;
+    margin: 0;
+  }
+
+  .portfolio-filter .ui-select {
+    min-height: 42px;
+    padding-inline: 10px 28px;
+    font-size: 0.84rem;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .portfolio-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-filter {
+    justify-self: end;
   }
 }
