@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
+import { Menu } from "lucide-react";
 import "./Navbar.css";
-import { IconContext } from "react-icons";
-import { COLORS } from "../assets/constants/colors.js";
 import Sidebar from "./Sidebar.jsx";
-import { SidebarData } from "./SidebarData.js";
-
-const pageMap = ["Home", "Portfolio", "About Me"];
+import { SidebarData } from "./SidebarData.jsx";
+import { Button } from "./ui";
 
 class Navbar extends Component {
   constructor(props) {
@@ -33,37 +31,36 @@ class Navbar extends Component {
   render() {
     return (
       <>
-        <IconContext.Provider value={{ color: COLORS.on_background }}>
-          <header className="navbar-root">
-            {/* Mobile menu button */}
-            <button
+        <header className="navbar-root">
+          <div className="mobile-navbar-content">
+            <Link
+              to="/"
+              className="mobile-navbar-brand"
+              onClick={() => this.setModalOpen(false)}
+            >
+              Alexander Zhong
+            </Link>
+            <Button
+              variant="ghost"
               className="menu-bars"
               onClick={() => this.setModalOpen(true)}
               aria-label="Open navigation menu"
+              aria-expanded={this.state.modalOpen}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="28px"
-                viewBox="0 -960 960 960"
-                width="28px"
-                fill={COLORS.on_surface}
-              >
-                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-              </svg>
-            </button>
+              <Menu aria-hidden="true" size={24} strokeWidth={2} />
+            </Button>
+          </div>
 
-            {/* Desktop nav */}
-            <nav className="navbar-container">
-              <div className="top-nav-container">
-                {SidebarData.map((item, index) => (
-                  <Link key={index} to={item.path} className="top-nav-option">
-                    <span className="top-nav-label">{item.title}</span>
-                  </Link>
-                ))}
-              </div>
-            </nav>
-          </header>
-        </IconContext.Provider>
+          <nav className="navbar-container">
+            <div className="top-nav-container">
+              {SidebarData.map((item, index) => (
+                <Link key={index} to={item.path} className="top-nav-option">
+                  <span className="top-nav-label">{item.title}</span>
+                </Link>
+              ))}
+            </div>
+          </nav>
+        </header>
 
         {this.state.modalOpen &&
           createPortal(

@@ -1,9 +1,9 @@
-import React, { useState, Component, useRef } from "react";
-import { Link } from "react-router-dom";
-import { SidebarData } from "./SidebarData.js";
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import { X } from "lucide-react";
+import { SidebarData } from "./SidebarData.jsx";
 import "./Sidebar.css";
-import { IconContext } from "react-icons";
-import { COLORS } from "../assets/constants/colors.js";
+import { Button, Sheet, SheetContent, SheetHeader } from "./ui";
 
 class Sidebar extends Component {
   constructor(props) {
@@ -14,63 +14,68 @@ class Sidebar extends Component {
   }
 
   render() {
-    // const modal = <div id="modal" onClick={(e) => this.showSidebar} />;
     return (
-      <>
-        <div
-          className="modal-container"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              this.props.closeModal();
-            }
-          }}
+      <Sheet
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            this.props.closeModal();
+          }
+        }}
+      >
+        <SheetContent
+          as="nav"
+          className="mobile-drawer"
+          role="dialog"
+          aria-label="Mobile navigation"
+          aria-modal="true"
         >
-          <nav
-            // className={this.state.sidebar ? "nav-menu active" : "nav-menu"}
-            className="nav-menu active"
-            style={{ zIndex: 5 }}
-          >
-            <ul className="nav-menu-items">
-              <li className="navbar-toggle">
-                <Link 
-                  to="#" 
-                  className="menu-close"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    this.props.closeModal();
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="50px"
-                    width="50px"
-                    viewBox="0 -960 960 960"
-                    fill={COLORS.on_surface}
-                  >
-                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-                  </svg>
-                </Link>
-              </li>
+          <SheetHeader className="drawer-header">
+            <div className="drawer-heading">
+              <p className="drawer-title">Alexander Zhong</p>
+              <p className="drawer-description">
+                Software engineering, applied AI, and selected projects.
+              </p>
+            </div>
+            <Button
+              variant="ghost"
+              className="menu-close"
+              onClick={this.props.closeModal}
+              aria-label="Close navigation menu"
+            >
+              <X aria-hidden="true" size={18} strokeWidth={2} />
+            </Button>
+          </SheetHeader>
+
+          <div className="drawer-body">
+            <p className="drawer-section-label">Navigation</p>
+            <ul className="drawer-nav-list">
               {SidebarData.map((item, index) => {
                 return (
-                  <li key={index} className={item.cName}>
-                    <Link
+                  <li key={index}>
+                    <NavLink
+                      exact={item.path === "/"}
                       to={item.path}
+                      className="drawer-nav-link"
+                      activeClassName="drawer-nav-link-active"
                       onClick={() => {
                         this.setState({ page: index });
                         this.props.closeModal();
                       }}
                     >
-                      {/* {item.icon} */}
+                      <span className="drawer-nav-icon">{item.icon}</span>
                       <span>{item.title}</span>
-                    </Link>
+                    </NavLink>
                   </li>
                 );
               })}
             </ul>
-          </nav>
-        </div>
-      </>
+          </div>
+
+          <div className="drawer-footer">
+            <span>alexanderzhong.com</span>
+          </div>
+        </SheetContent>
+      </Sheet>
     );
   }
 }
