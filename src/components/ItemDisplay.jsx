@@ -78,6 +78,20 @@ export class ItemDisplay extends Component {
     return <div className="button-row">{links.map(this.getProjectLink)}</div>;
   }
 
+  getDescription() {
+    const paragraphs = Array.isArray(this.props.data.description)
+      ? this.props.data.description
+      : [this.props.data.description];
+
+    return (
+      <div className="case-study-overview">
+        {paragraphs.filter(Boolean).map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
+    );
+  }
+
   render() {
     const { data } = this.props;
     const images = this.getImages();
@@ -121,7 +135,7 @@ export class ItemDisplay extends Component {
         <div className="case-study-content">
           <section>
             <h2>Overview</h2>
-            <p>{data.description}</p>
+            {this.getDescription()}
           </section>
 
           {projectLinks && (

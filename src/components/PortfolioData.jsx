@@ -80,6 +80,37 @@ export const PortfolioData = [
     location: "Mountain View, CA",
   },
   {
+    id: 9,
+    title: "Software Engineering Intern at Google Payments Autofill",
+    type: "Career",
+    brief:
+      "Built backend risk-signal infrastructure supporting secure virtual card enrollment and retrieval.",
+    preview: "",
+    imageList: [],
+    description: [
+      "The Payments Autofill team focuses on making online checkout across Google Chrome and Android devices as fast, easy, and secure as possible. Its core mission is to eliminate checkout friction by automatically filling users' saved addresses and payment information.",
+      "A major initiative supporting that mission is the Virtual Card Number project. Instead of sharing a user's actual credit card number with a merchant, VCN replaces it with a unique secure token. This reduces the need to repeatedly enter a card security code, prevents merchants from receiving the underlying card number, and allows Google to securely share timely risk signals with card issuers to help detect and prevent fraud. My work directly contributed to enabling this secure, low-friction checkout experience.",
+      "During my internship, I implemented a new Ares Oar feature provider service to securely share anonymized risk signals with external credit card issuers during virtual card enrollment and retrieval. Ares is an anti-abuse platform, and Oar is a rule system within Ares. Together, the service enabled internal risk assessments, including account age, device bonding age, and security-update frequency, to be shared securely with issuer partners.",
+      "I defined new Protocol Buffer messages and bucketing enums to formally isolate the data from general system signals, integrated the service with sources including the UserDeviceRisk API, and established service dependencies and client access controls for partner access. Because the system called the backend directly, I also rolled back an initial client-side experimentation framework and replaced it with Abseil flag controls, enabling safe feature rollout across testing and production environments.",
+    ],
+    highlights: [
+      "Implemented an Ares Oar feature provider service that securely shared anonymized risk signals with external card issuers during virtual card enrollment and retrieval.",
+      "Defined Protocol Buffer messages and bucketing enums to isolate account, device-bonding, and security-update risk signals.",
+      "Integrated the service with the UserDeviceRisk API and established service dependencies and client access controls for issuer partners.",
+      "Replaced a client-side experimentation framework with Abseil flag controls for safe backend rollout across testing and production environments.",
+    ],
+    stack: [
+      "Protocol Buffers",
+      "Ares / Oar",
+      "Abseil Flags",
+      "Backend APIs",
+      "Access Controls",
+      "Payments Security",
+    ],
+    date: 202108,
+    location: "Mountain View, CA",
+  },
+  {
     id: 5,
     title: "Wanderform.com",
     type: "Project",

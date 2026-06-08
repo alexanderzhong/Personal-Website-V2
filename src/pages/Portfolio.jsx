@@ -8,24 +8,70 @@ import { SelectField } from "../components/ui";
 const getRecentPortfolioData = (items = PortfolioData) =>
   [...items].sort((a, b) => b.date - a.date);
 
+const getSelectedItemId = (search = "") => {
+  const item = new URLSearchParams(search).get("item");
+
+  if (item === null) {
+    return null;
+  }
+
+  const id = Number(item);
+  return PortfolioData.some((entry) => entry.id === id) ? id : null;
+};
+
 class Portfolio extends Component {
   constructor(props) {
     super(props);
+
+    const selected = getSelectedItemId(this.props.location.search);
 
     this.state = {
       elements: getRecentPortfolioData(),
       sortBy: 0,
       sortingMethod: "Recent",
       ascending: true,
-      mode: true,
-      selected: 0,
+      mode: selected === null,
+      selected,
       selectedFilter: "All",
     };
 
+    this.listScrollY = 0;
     this.handleSelection = this.handleSelection.bind(this);
     this.handleReturn = this.handleReturn.bind(this);
     this.search = this.search.bind(this);
     this.filterByCategory = this.filterByCategory.bind(this);
+    this.syncFromLocation = this.syncFromLocation.bind(this);
+  }
+
+  componentDidMount() {
+    this.unlisten = this.props.history.listen((location) => {
+      this.syncFromLocation(location);
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.unlisten) {
+      this.unlisten();
+    }
+  }
+
+  syncFromLocation(location) {
+    const selected = getSelectedItemId(location.search);
+    const returningToList = selected === null;
+
+    this.setState(
+      {
+        mode: returningToList,
+        selected,
+      },
+      () => {
+        window.scrollTo({
+          top: returningToList ? this.listScrollY : 0,
+          left: 0,
+          behavior: "auto",
+        });
+      },
+    );
   }
 
   search(e) {
@@ -87,15 +133,12 @@ class Portfolio extends Component {
   }
 
   handleSelection(index) {
-    this.setState({ mode: false, selected: index }, () => {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    });
+    this.listScrollY = window.scrollY;
+    this.props.history.push(`/portfolio?item=${index}`);
   }
 
   handleReturn() {
-    this.setState({ mode: true }, () => {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    });
+    this.props.history.push("/portfolio");
   }
 
   render() {
@@ -141,12 +184,9 @@ class Portfolio extends Component {
       );
     }
 
-    let currProj = this.state.elements[0];
-    for (let i = 0; i < this.state.elements.length; i++) {
-      if (this.state.elements[i].id === this.state.selected) {
-        currProj = this.state.elements[i];
-      }
-    }
+    const currProj =
+      PortfolioData.find((item) => item.id === this.state.selected) ||
+      getRecentPortfolioData()[0];
 
     return (
       <main className="page-shell portfolio">

@@ -1,11 +1,37 @@
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
   width: 100%;
   margin-top: 24px;
 }
 
 .grid-item {
   height: 100%;
+  animation: content-enter 420ms ease-out both;
+}
+
+.grid-item:nth-child(1),
+.grid-item:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.grid-item:nth-child(3),
+.grid-item:nth-child(4) {
+  animation-delay: 165ms;
+}
+
+.grid-item:nth-child(5),
+.grid-item:nth-child(6) {
+  animation-delay: 210ms;
+}
+
+.grid-item:nth-child(n + 7) {
+  animation-delay: 255ms;
+}
+
+@media only screen and (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./element.css";
-import { Badge, Card, CardContent } from "./ui";
 
 export class PortfolioElement extends Component {
   getDate(num) {
@@ -14,20 +13,17 @@ export class PortfolioElement extends Component {
     const { info } = this.props;
 
     return (
-      <Card
-        as="button"
+      <button
         type="button"
         className={`portfolio-card portfolio-card-${info.type}`}
         onClick={this.props.onClick}
       >
-        <CardContent className="portfolio-card-body">
-          <div className="portfolio-card-header">
-            <div className="portfolio-card-title-group">
-              <Badge className={`portfolio-type-badge type-${info.type}`}>
-                {info.type}
-              </Badge>
-              <h2>{info.title}</h2>
-            </div>
+        <div className="portfolio-card-body">
+          <div className="portfolio-card-topline">
+            <span className={`portfolio-type-label type-${info.type}`}>
+              <span aria-hidden="true"></span>
+              <span>{info.type}</span>
+            </span>
             <div className="portfolio-card-meta">
               <span>{this.getDate(info.date)}</span>
               <span>{info.location}</span>
@@ -35,25 +31,27 @@ export class PortfolioElement extends Component {
           </div>
 
           <div className="portfolio-card-main">
+            <h2>{info.title}</h2>
             <p>{info.brief}</p>
           </div>
 
-          <div className="portfolio-card-footer">
-            {info.stack && (
+          <div
+            className={`portfolio-card-footer ${
+              info.stack?.length ? "" : "portfolio-card-footer-action-only"
+            }`}
+          >
+            {info.stack?.length > 0 && (
               <div className="portfolio-card-stack">
                 {info.stack.slice(0, 5).map((item) => (
-                  <Badge key={item} variant="muted">
-                    {item}
-                  </Badge>
+                  <span key={item}>{item}</span>
                 ))}
               </div>
             )}
             <div className="portfolio-card-action" aria-hidden="true">
-              View
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -66,8 +64,8 @@ export class PortfolioElement extends Component {
               </svg>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </button>
     );
   }
 }

@@ -6,8 +6,8 @@
 
 .about-intro {
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 48px;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 56px;
   align-items: start;
 }
 
@@ -17,18 +17,43 @@
   border-radius: var(--radius-md);
   object-fit: cover;
   filter: saturate(0.95);
+  animation: content-enter 420ms ease-out both;
 }
 
 .about-copy {
-  max-width: 680px;
+  max-width: 800px;
+}
+
+.about-copy > * {
+  animation: content-enter 420ms ease-out both;
+}
+
+.about-copy > :nth-child(1) {
+  animation-delay: 40ms;
+}
+
+.about-copy > :nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.about-copy > :nth-child(3) {
+  animation-delay: 105ms;
+}
+
+.about-copy > :nth-child(4) {
+  animation-delay: 140ms;
+}
+
+.about-copy > :nth-child(n + 5) {
+  animation-delay: 175ms;
 }
 
 .about-copy h1 {
   margin: 6px 0 18px;
   color: var(--on-background);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 740;
-  line-height: 1.08;
+  font-size: clamp(2.1rem, 5vw, 3.8rem);
+  font-weight: 820;
+  line-height: 0.98;
 }
 
 .about-copy p:not(.section-label) {
@@ -43,8 +68,9 @@
 }
 
 .about-links {
-  max-width: 680px;
-  margin-left: 268px;
+  max-width: 800px;
+  margin-left: 296px;
+  animation: content-enter 420ms ease-out 210ms both;
 }
 
 .about-links-heading {
