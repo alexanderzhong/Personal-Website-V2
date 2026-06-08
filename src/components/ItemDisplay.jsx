@@ -78,6 +78,21 @@ export class ItemDisplay extends Component {
   }
 
   getDescription() {
+    if (this.props.data.overviewSections) {
+      return (
+        <div className="case-study-overview">
+          {this.props.data.overviewSections.map((section) => (
+            <section className="case-study-overview-section" key={section.title}>
+              <h3>{section.title}</h3>
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </section>
+          ))}
+        </div>
+      );
+    }
+
     const paragraphs = Array.isArray(this.props.data.description)
       ? this.props.data.description
       : [this.props.data.description];

@@ -44,11 +44,25 @@ class Portfolio extends Component {
     this.unlisten = this.props.history.listen((location) => {
       this.syncFromLocation(location);
     });
+
+    if (!this.state.mode) {
+      this.scrollFrame = window.requestAnimationFrame(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+      });
+    }
   }
 
   componentWillUnmount() {
     if (this.unlisten) {
       this.unlisten();
+    }
+
+    if (this.scrollFrame) {
+      window.cancelAnimationFrame(this.scrollFrame);
     }
   }
 

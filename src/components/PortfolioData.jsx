@@ -238,15 +238,52 @@ export const PortfolioData = [
       "WanderformCreatePlan.png",
       "WanderformItinerary.png",
     ],
-    description: [
-      "I built Wanderform as an AI travel planner that turns trip constraints into structured, editable itineraries. Users can save trips, review generated plans, and revise individual events.",
-      "The app uses React, Vite, Tailwind CSS, and shadcn/ui on the frontend, with Express, Firebase Auth, Firestore, and LLM APIs supporting user profiles, saved trips, itinerary generation, event-level editing, summaries, and trip refinement.",
-      "The interface includes calendar, timeline, map, weather, and AI editing views. I added Jest and Supertest coverage for key backend behavior, including itinerary generation and editing.",
+    overviewSections: [
+      {
+        title: "Why I built it",
+        paragraphs: [
+          "I built Wanderform after seeing how exhausting group travel planning could be. My mom was tired of planning every family trip, and I experienced the same frustration when organizing trips for groups of up to ten friends. Researching destinations, balancing preferences, and creating a realistic schedule required too many separate tools and conversations.",
+          "Most travel products handle only one part of the process, such as inspiration, bookings, maps, or itinerary storage. Wanderform combines recommendations, research, schedule planning, and practical trip management for casual travelers, especially the person who becomes the group's unofficial planner.",
+        ],
+      },
+      {
+        title: "From a prompt to an editable trip",
+        paragraphs: [
+          "Users begin with a freeform trip description and can add structured details such as destination, dates, travelers, budget, interests, and activities to avoid. Wanderform generates an unsaved itinerary draft that the user can accept, revise, compare with another version, or regenerate.",
+          "After saving a trip, users can edit individual events, drag activities to new times, request broader AI changes, and manage packing lists. AI revisions are presented as a temporary draft and do not modify the saved itinerary until the user approves them.",
+          "Unlike a static chatbot response, Wanderform stores the itinerary as structured trip data. Calendar views show schedule timing and density, Google Places verifies recommended locations, and Google Routes estimates travel time between activities and inserts transportation blocks when needed.",
+        ],
+      },
+      {
+        title: "Architecture",
+        paragraphs: [
+          "The frontend is built with React, Vite, Tailwind CSS, and shadcn/ui. Firebase Authentication manages user identity, and the frontend sends a Firebase ID token with each request to an Express API.",
+          "The Express server verifies authentication and trip ownership, validates incoming data, calls OpenAI and location services, and stores plans, profiles, packing lists, and usage records in Firestore. The frontend is deployed through GitHub Pages, while the Dockerized backend is configured for Google Cloud Run.",
+          "The server requests JSON-only model responses using a strict itinerary contract with required fields, accepted event types, date formats, and scheduling rules. Every response is parsed, normalized, sanitized, and validated before it can be returned or stored.",
+        ],
+      },
+      {
+        title: "Making AI changes dependable",
+        paragraphs: [
+          "The hardest engineering problem was making probabilistic model output behave like dependable application data. An itinerary can sound convincing while containing invalid dates, impossible schedules, vague locations, or fabricated details.",
+          "The server independently checks dates, time ranges, event IDs, nested objects, and trip boundaries. Empty, truncated, malformed, or incorrectly shaped model responses return clear errors instead of being saved. Invalid edit operations are rejected atomically, leaving the existing itinerary unchanged.",
+          "Wanderform also limits daily plan generation and monthly token usage, keeps API keys on the server, checks ownership for every plan, restricts CORS origins, sanitizes input, limits request sizes, and redacts sensitive log data. The backend currently has 38 automated tests covering authentication, validation, prompt behavior, itinerary edits, and Google Places and Routes enrichment.",
+        ],
+      },
+      {
+        title: "Current status and next steps",
+        paragraphs: [
+          "Wanderform is publicly available as an actively developed beta. The product began with a traditional multi-step trip form, but I replaced it with a prompt-first experience that better matches how people naturally describe travel plans. I also rebuilt the navigation, dashboard, calendar editing, and AI revision experience around an approval-first model.",
+          "The next major feature is a flexible flight and date optimizer that considers airfare, weekends, paid time off, trip length, and arrival quality. Other planned work includes area clustering, event discovery, reservation tracking, live weather, saved travel inspiration, improved group coordination, and tools for evaluating prompt and itinerary quality.",
+        ],
+      },
     ],
     highlights: [
-      "Built saved trips, itinerary generation, event editing, and trip refinement.",
-      "Designed calendar, timeline, map, weather, and AI editing views.",
-      "Added Jest and Supertest coverage around key backend behavior.",
+      "Built a prompt-first trip creation flow with structured, editable itinerary drafts.",
+      "Designed an approval-first AI editing system that previews changes before saving.",
+      "Added deterministic validation, Google Places verification, and Google Routes travel-time enrichment.",
+      "Implemented authentication, ownership checks, usage limits, input sanitization, and protected server-side API access.",
+      "Added 38 backend tests covering authentication, validation, itinerary editing, and external integrations.",
     ],
     stack: [
       "React",
@@ -255,7 +292,13 @@ export const PortfolioData = [
       "Express",
       "Firebase Auth",
       "Firestore",
-      "LLM APIs",
+      "OpenAI",
+      "Google Places",
+      "Google Routes",
+      "Jest",
+      "Supertest",
+      "Docker",
+      "Google Cloud Run",
     ],
     date: 202506,
     location: "Mountain View, CA",
