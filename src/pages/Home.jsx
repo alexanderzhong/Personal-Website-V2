@@ -2,70 +2,107 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
 import { Button } from "../components/ui";
+import { PortfolioData } from "../components/PortfolioData.jsx";
+import wanderformTrips from "../assets/img/WanderformTrips.png";
 
-const wanderformTags = ["React", "Vite", "Firebase", "LLM APIs"];
+const feature = PortfolioData.find((item) => item.id === 5);
+const latestStories = [...PortfolioData]
+  .filter((item) => item.id !== feature.id)
+  .sort((a, b) => b.date - a.date)
+  .slice(0, 4);
+const moreStories = PortfolioData.filter((item) =>
+  [8, 9, 6, 7].includes(item.id),
+);
 
 class Home extends Component {
+  getDate(num) {
+    const month = num % 100;
+    const year = Math.floor(num / 100);
+    return `${month < 10 ? "0" : ""}${month}/${year}`;
+  }
+
   render() {
     return (
-      <main className="page-shell home-page">
-        <section className="home-hero">
-          <div className="home-hero-copy">
-            <div className="home-eyebrow-row">
-              <p className="section-label">Software engineer at Google</p>
-              <span aria-hidden="true"></span>
+      <main className="page-shell home-page home-blog">
+        <section className="home-news-grid" aria-label="Featured work">
+          <article className="home-lead-story">
+            <div className="home-story-kicker">
+              <span>{feature.type}</span>
+              <span>{this.getDate(feature.date)}</span>
             </div>
-            <h1 className="quiet-title">Alexander Zhong</h1>
-            <p className="quiet-copy">
-              I build product systems at Google Payments and practical AI tools
-              outside of work. Recent projects include Google Wallet/Pix
-              reliability, Wanderform, and Stanford ML/NLP research.
-            </p>
-            <div className="button-row">
-              <Button as={Link} to="/portfolio" variant="primary">
-                View Work
-              </Button>
-              <Button as={Link} to="/aboutme">
-                About Me
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        <section className="home-feature" aria-labelledby="wanderform-heading">
-          <div className="home-feature-content">
-            <div className="home-feature-copy">
-              <p className="section-label">Featured Build</p>
-              <h2 id="wanderform-heading">Wanderform</h2>
-              <p>
-                A travel planning workspace for generating, editing, and saving
-                structured itineraries from natural-language trip constraints.
-              </p>
-              <div className="home-feature-tags">
-                {wanderformTags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
+            <div className="home-lead-intro">
+              <img src={wanderformTrips} alt="" />
+              <div className="home-lead-copy">
+                <div className="home-lead-text">
+                  <h2>{feature.title}</h2>
+                  <p>{feature.brief}</p>
+                </div>
+                {feature.stack && (
+                  <div className="home-story-tags">
+                    {feature.stack.slice(0, 4).map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <div className="button-row home-story-actions">
+                  <Button as={Link} to="/portfolio?item=5" variant="primary">
+                    Read Case Study
+                  </Button>
+                  <Button
+                    as="a"
+                    href="https://wanderform.com"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Visit Site
+                  </Button>
+                </div>
               </div>
             </div>
-            <div className="home-feature-note">
-              <span>Independent product</span>
-              <span>AI trip planning</span>
+          </article>
+
+          <section className="home-latest" aria-labelledby="latest-heading">
+            <div className="home-column-heading">
+              <h2 id="latest-heading">Latest Work</h2>
+              <Link to="/portfolio">View all</Link>
             </div>
-            <div className="button-row home-feature-actions">
-              <Button
-                as="a"
-                href="https://wanderform.com"
-                variant="primary"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Visit Site
-              </Button>
-              <Button as={Link} to="/portfolio?item=5">
-                Case Study
-              </Button>
+            <div className="home-latest-list">
+              {latestStories.map((item) => (
+                <Link
+                  key={item.id}
+                  className="home-list-story"
+                  to={`/portfolio?item=${item.id}`}
+                >
+                  <div className="home-story-kicker">
+                    <span>{item.type}</span>
+                    <span>{this.getDate(item.date)}</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.brief}</p>
+                  <span className="home-read-link">Continue Reading</span>
+                </Link>
+              ))}
             </div>
-          </div>
+          </section>
+
+          <aside className="home-more" aria-labelledby="more-heading">
+            <div className="home-column-heading">
+              <h2 id="more-heading">More to Read</h2>
+            </div>
+            <div className="home-more-list">
+              {moreStories.map((item) => (
+                <Link
+                  key={item.id}
+                  className="home-more-story"
+                  to={`/portfolio?item=${item.id}`}
+                >
+                  <span>{item.type}</span>
+                  <strong>{item.title}</strong>
+                  <small>{item.brief}</small>
+                </Link>
+              ))}
+            </div>
+          </aside>
         </section>
       </main>
     );

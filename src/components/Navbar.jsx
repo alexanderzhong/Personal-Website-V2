@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { Menu } from "lucide-react";
 import "./Navbar.css";
@@ -52,11 +52,20 @@ class Navbar extends Component {
           </div>
 
           <nav className="navbar-container">
+            <Link to="/" className="navbar-brand">
+              Alexander Zhong
+            </Link>
             <div className="top-nav-container">
               {SidebarData.map((item, index) => (
-                <Link key={index} to={item.path} className="top-nav-option">
+                <NavLink
+                  key={index}
+                  exact={item.path === "/"}
+                  to={item.path}
+                  className="top-nav-option"
+                  activeClassName="top-nav-option-active"
+                >
                   <span className="top-nav-label">{item.title}</span>
-                </Link>
+                </NavLink>
               ))}
             </div>
           </nav>

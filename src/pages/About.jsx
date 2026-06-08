@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./aboutMe.css";
+import "./about.css";
 import profile from "../assets/img/profile_picture.jpg";
 import resume from "../assets/documents/AlexanderZhongResume.pdf";
 import { Card, CardContent } from "../components/ui";
@@ -45,7 +45,7 @@ const ArrowIcon = () => (
   </svg>
 );
 
-class AboutMe extends Component {
+class About extends Component {
   render() {
     return (
       <main className="page-shell about-page">
@@ -115,4 +115,4 @@ class AboutMe extends Component {
   }
 }
 
-export default AboutMe;
+export default About;

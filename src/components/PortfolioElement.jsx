@@ -42,12 +42,13 @@ export class PortfolioElement extends Component {
           >
             {info.stack?.length > 0 && (
               <div className="portfolio-card-stack">
-                {info.stack.slice(0, 5).map((item) => (
+                {info.stack.slice(0, 3).map((item) => (
                   <span key={item}>{item}</span>
                 ))}
               </div>
             )}
             <div className="portfolio-card-action" aria-hidden="true">
+              <span>Read case study</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

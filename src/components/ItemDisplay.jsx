@@ -10,7 +10,6 @@ import wanderformCreatePlan from "../assets/img/WanderformCreatePlan.png";
 import wanderformItinerary from "../assets/img/WanderformItinerary.png";
 import cs229Report from "../assets/documents/CS229ProjectFinalReport.pdf";
 import cs224nReport from "../assets/documents/CS224NFinalReport.pdf";
-import { COLORS } from "../assets/constants/colors.js";
 import { Badge, Button } from "./ui";
 import CaseStudyCarousel from "./CaseStudyCarousel.jsx";
 
@@ -99,30 +98,19 @@ export class ItemDisplay extends Component {
 
     return (
       <article className="case-study">
-        <Button
-          variant="ghost"
-          className="back-button"
-          onClick={this.props.onBack}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="20px"
-            viewBox="0 -960 960 960"
-            width="20px"
-            fill={COLORS.icon_muted}
-            aria-hidden="true"
-          >
-            <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
-          </svg>
-          Back
-        </Button>
-
         <header className="case-study-header">
-          <div>
-            <p className="section-label">{data.type}</p>
-            <h1>{data.title}</h1>
-          </div>
+          <nav className="case-study-breadcrumb" aria-label="Breadcrumb">
+            <button type="button" onClick={this.props.onBack}>
+              Portfolio
+            </button>
+            <span aria-hidden="true">/</span>
+            <span>{data.title}</span>
+          </nav>
+          <h1>{data.title}</h1>
           <div className="case-study-meta">
+            <span className={`case-study-type type-${data.type}`}>
+              {data.type}
+            </span>
             <span>{this.getDate(data.date)}</span>
             <span>{data.location}</span>
           </div>

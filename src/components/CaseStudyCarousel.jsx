@@ -136,25 +136,6 @@ export function CaseStudyCarousel({ images, title }) {
               />
             ))}
           </div>
-          <div
-            className="carousel-thumbnails"
-            aria-label="Screenshot thumbnails"
-          >
-            {images.map((image, index) => (
-              <button
-                type="button"
-                key={image}
-                className={`carousel-thumbnail ${
-                  index === selectedIndex ? "carousel-thumbnail-active" : ""
-                }`}
-                onClick={() => scrollTo(index)}
-                aria-label={`Show screenshot ${index + 1}`}
-                tabIndex={-1}
-              >
-                <img src={image} alt="" />
-              </button>
-            ))}
-          </div>
         </>
       )}
     </section>

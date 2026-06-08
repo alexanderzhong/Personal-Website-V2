@@ -13,8 +13,8 @@ export const SidebarData = [
     icon: <Layers3 aria-hidden="true" strokeWidth={2} />,
   },
   {
-    title: "About Me",
-    path: "/aboutme",
+    title: "About",
+    path: "/about",
     icon: <User aria-hidden="true" strokeWidth={2} />,
   },
 ];
