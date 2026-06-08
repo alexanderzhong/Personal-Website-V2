@@ -11,7 +11,7 @@ const latestStories = [...PortfolioData]
   .sort((a, b) => b.date - a.date)
   .slice(0, 4);
 const moreStories = PortfolioData.filter((item) =>
-  [8, 9, 6, 7].includes(item.id),
+  [4, 3, 2, 1].includes(item.id),
 );
 
 class Home extends Component {
@@ -31,10 +31,10 @@ class Home extends Component {
               <span>{this.getDate(feature.date)}</span>
             </div>
             <div className="home-lead-intro">
-              <img src={wanderformTrips} alt="" />
+              <img src={wanderformTrips} alt="Wanderform trip dashboard" />
               <div className="home-lead-copy">
                 <div className="home-lead-text">
-                  <h2>{feature.title}</h2>
+                  <h1>{feature.title}</h1>
                   <p>{feature.brief}</p>
                 </div>
                 {feature.stack && (
@@ -79,7 +79,6 @@ class Home extends Component {
                   </div>
                   <h3>{item.title}</h3>
                   <p>{item.brief}</p>
-                  <span className="home-read-link">Continue Reading</span>
                 </Link>
               ))}
             </div>

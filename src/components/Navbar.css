@@ -19,23 +19,17 @@
   padding: 0 var(--space-page-x);
 }
 
-.mobile-navbar-content {
-  display: none;
-}
-
-.navbar-brand,
-.mobile-navbar-brand {
+.navbar-brand {
   color: var(--on-background);
   font-size: 0.92rem;
-  font-weight: 560;
+  font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.2;
   text-decoration: none;
   animation: content-enter-left 380ms ease-out 50ms both;
 }
 
-.navbar-brand:hover,
-.mobile-navbar-brand:hover {
+.navbar-brand:hover {
   color: var(--on-background);
   text-decoration: none;
 }
@@ -72,7 +66,7 @@
   display: inline-block;
   padding: 7px 9px;
   font-size: 0.92rem;
-  font-weight: 480;
+  font-weight: 400;
   letter-spacing: -0.01em;
   text-transform: none;
   transition: color 0.15s ease-out;
@@ -85,57 +79,13 @@
 
 .top-nav-option-active .top-nav-label {
   color: var(--on-background);
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .top-nav-option:focus-visible {
   border-radius: 3px;
   outline: 2px solid var(--primary);
   outline-offset: 3px;
-}
-
-.menu-bars {
-  display: none;
-  width: 40px;
-  height: 40px;
-  min-height: 40px;
-  padding: 8px;
-  border-color: transparent;
-  border-radius: 50%;
-  background-color: transparent;
-  color: var(--on-background);
-  -webkit-tap-highlight-color: transparent;
-  transition: background-color 0.12s ease-out;
-  animation: content-enter 360ms ease-out 90ms both;
-}
-
-.menu-bars:hover {
-  border-color: transparent;
-  background-color: transparent;
-  transform: none;
-}
-
-.menu-bars:active {
-  background-color: var(--background-variant);
-  transform: none;
-}
-
-.menu-bars:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
-}
-
-.menu-bars:focus-visible {
-  border-color: transparent;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.18);
-}
-
-#page-name {
-  position: absolute;
-  left: 50%;
-  color: var(--on-background);
-  transform: translateX(-50%);
 }
 
 @keyframes navbar-enter {
@@ -151,27 +101,21 @@
 }
 
 @media screen and (max-width: 800px) {
-  .navbar-root {
-    min-height: 64px;
-  }
-
-  .mobile-navbar-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 64px;
-    padding: 0 var(--space-page-x);
-  }
-
-  .mobile-navbar-brand {
-    font-weight: 560;
-  }
-
-  .menu-bars {
-    display: inline-flex;
-  }
-
   .navbar-container {
-    display: none;
+    height: 60px;
+    padding-inline: 16px 10px;
+  }
+
+  .navbar-brand {
+    font-size: 0.86rem;
+  }
+
+  .top-nav-container {
+    gap: 0;
+  }
+
+  .top-nav-label {
+    padding: 8px 7px;
+    font-size: 0.82rem;
   }
 }

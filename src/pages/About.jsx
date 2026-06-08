@@ -58,6 +58,7 @@ class About extends Component {
           <div className="about-copy">
             <p className="section-label">About</p>
             <h1>Engineer, product builder, and musician.</h1>
+            <h2>Background</h2>
             <p>
               Hi, I&apos;m Alex, a software engineer at Google working in
               Payments and Google Wallet. I graduated from Carnegie Mellon
@@ -66,19 +67,18 @@ class About extends Component {
               pursuing a Stanford Graduate Certificate in Artificial
               Intelligence.
             </p>
+            <h2>Current work</h2>
             <p>
-              My recent work sits at the intersection of product engineering,
-              reliability, and applied AI. Professionally, I have worked on
-              GPay, Wallet, Pix, transaction management, and compliance-oriented
-              product systems. Outside of work, I have been building
-              Wanderform.com, an LLM-backed travel planner, and exploring
-              machine learning and NLP through Stanford CS229 and CS224N
-              research projects.
+              My recent work focuses on product engineering, reliability, and
+              applied AI. At Google, I have worked on GPay, Wallet, Pix,
+              transaction management, and compliance features. Outside of work,
+              I build Wanderform.com, an AI travel planner, and study machine
+              learning and NLP through Stanford CS229 and CS224N projects.
             </p>
+            <h2>Music</h2>
             <p>
-              I also have a long-running love of music. I started piano when I
-              was 3, played violin for about 12 years, and still spend time with
-              classical piano, jazz piano, and improvisation.
+              I started piano when I was 3 and played violin for about 12 years.
+              I continue to play classical piano, jazz piano, and improvisation.
             </p>
           </div>
         </section>
@@ -87,7 +87,7 @@ class About extends Component {
           <CardContent className="about-links-content">
             <div className="about-links-heading">
               <p className="section-label">Connect with me</p>
-              <p>Find my work, background, or reach me directly.</p>
+              <p>View my work and background, or contact me directly.</p>
             </div>
 
             <div className="about-connect-list">

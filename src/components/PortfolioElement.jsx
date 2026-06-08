@@ -21,13 +21,8 @@ export class PortfolioElement extends Component {
         <div className="portfolio-card-body">
           <div className="portfolio-card-topline">
             <span className={`portfolio-type-label type-${info.type}`}>
-              <span aria-hidden="true"></span>
               <span>{info.type}</span>
             </span>
-            <div className="portfolio-card-meta">
-              <span>{this.getDate(info.date)}</span>
-              <span>{info.location}</span>
-            </div>
           </div>
 
           <div className="portfolio-card-main">
@@ -35,20 +30,54 @@ export class PortfolioElement extends Component {
             <p>{info.brief}</p>
           </div>
 
-          <div
-            className={`portfolio-card-footer ${
-              info.stack?.length ? "" : "portfolio-card-footer-action-only"
-            }`}
-          >
-            {info.stack?.length > 0 && (
-              <div className="portfolio-card-stack">
-                {info.stack.slice(0, 3).map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-            )}
+          <div className="portfolio-card-meta">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M8 2v4" />
+                <path d="M16 2v4" />
+                <rect width="18" height="18" x="3" y="4" rx="2" />
+                <path d="M3 10h18" />
+              </svg>
+              {this.getDate(info.date)}
+            </span>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+              {info.location}
+            </span>
+          </div>
+
+          {info.stack?.length > 0 && (
+            <div className="portfolio-card-stack">
+              {info.stack.slice(0, 3).map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          )}
+
+          <div className="portfolio-card-footer">
             <div className="portfolio-card-action" aria-hidden="true">
-              <span>Read case study</span>
+              <span>View case study</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

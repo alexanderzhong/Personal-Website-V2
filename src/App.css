@@ -1,10 +1,6 @@
 @import "./theme.css";
 @import "./components/ui/ui.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -68,7 +64,7 @@ textarea {
 .section-label {
   color: var(--on-background-variant);
   font-size: 0.74rem;
-  font-weight: 760;
+  font-weight: 700;
   letter-spacing: 0.14em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -78,7 +74,7 @@ textarea {
   margin: 0;
   color: var(--on-background);
   font-size: clamp(2.75rem, 7vw, 5rem);
-  font-weight: 820;
+  font-weight: 600;
   line-height: 0.96;
 }
 
@@ -147,14 +143,6 @@ textarea {
     padding: 34px 16px 40px;
   }
 
-  .page-header {
-    align-items: center;
-    text-align: center;
-  }
-
-  .button-row {
-    justify-content: center;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

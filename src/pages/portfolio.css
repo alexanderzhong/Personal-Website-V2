@@ -33,7 +33,7 @@
   margin: 0;
   color: var(--on-background-variant);
   font-size: 0.74rem;
-  font-weight: 720;
+  font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1.3;
 }
@@ -42,7 +42,7 @@
   margin: 0;
   max-width: 720px;
   font-size: clamp(1.9rem, 4vw, 2.75rem);
-  font-weight: 580;
+  font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 1.06;
 }
@@ -61,6 +61,13 @@
   gap: 12px;
   align-items: end;
   padding-top: 2px;
+}
+
+.portfolio-results {
+  margin: -14px 0 -8px;
+  color: var(--on-background-variant);
+  font-size: 0.78rem;
+  line-height: 1.4;
 }
 
 .portfolio-tools > * {
@@ -144,7 +151,7 @@
   .search-bar-input,
   .portfolio-filter .ui-select {
     border-color: transparent;
-    border-radius: 12px;
+    border-radius: 8px;
     background-color: var(--background-variant);
   }
 

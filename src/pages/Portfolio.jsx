@@ -27,9 +27,6 @@ class Portfolio extends Component {
 
     this.state = {
       elements: getRecentPortfolioData(),
-      sortBy: 0,
-      sortingMethod: "Recent",
-      ascending: true,
       mode: selected === null,
       selected,
       selectedFilter: "All",
@@ -93,43 +90,8 @@ class Portfolio extends Component {
 
     this.setState({
       elements: filteredArray,
-      sortBy: 0,
-      sortingMethod: nextFilter === "All" ? "Recent" : "Category",
       selectedFilter: nextFilter,
     });
-  }
-
-  sortData(num) {
-    const originalArray = getRecentPortfolioData();
-    var newArray = originalArray;
-    if (num === 0) {
-      this.setState({
-        elements: originalArray,
-        sortBy: 0,
-        sortingMethod: "Recent",
-        ascending: this.state.ascending,
-      });
-    } else if (num === 1) {
-      newArray = [...originalArray].sort((a, b) =>
-        a.title.localeCompare(b.title),
-      );
-      this.setState({
-        elements: newArray,
-        sortBy: 1,
-        sortingMethod: "Name",
-        ascending: this.state.ascending,
-      });
-    } else {
-      newArray = [...originalArray].sort((a, b) =>
-        a.type.localeCompare(b.type),
-      );
-      this.setState({
-        elements: newArray,
-        sortBy: 2,
-        sortingMethod: "Type",
-        ascending: this.state.ascending,
-      });
-    }
   }
 
   handleSelection(index) {
@@ -151,9 +113,9 @@ class Portfolio extends Component {
               Projects, research, and product work.
             </h1>
             <p className="quiet-copy">
-              A curated index of engineering work across Google Payments,
-              AI-backed products, academic machine learning, and earlier
-              software projects.
+              Engineering work from Google Payments, independent products,
+              academic machine learning research, and earlier software
+              projects.
             </p>
           </div>
           <div className="portfolio-tools">
@@ -161,6 +123,7 @@ class Portfolio extends Component {
               type="text"
               className="search-bar-input"
               placeholder="Search work"
+              aria-label="Search work"
               onChange={this.search}
             />
             <SelectField
@@ -176,6 +139,10 @@ class Portfolio extends Component {
               <option value="Career">Career</option>
             </SelectField>
           </div>
+          <p className="portfolio-results" aria-live="polite">
+            {this.state.elements.length}{" "}
+            {this.state.elements.length === 1 ? "item" : "items"}
+          </p>
           <Grid
             elements={this.state.elements}
             onSelect={this.handleSelection}
@@ -187,10 +154,21 @@ class Portfolio extends Component {
     const currProj =
       PortfolioData.find((item) => item.id === this.state.selected) ||
       getRecentPortfolioData()[0];
+    const orderedProjects = getRecentPortfolioData();
+    const currentIndex = orderedProjects.findIndex(
+      (item) => item.id === currProj.id,
+    );
+    const nextProject =
+      orderedProjects[(currentIndex + 1) % orderedProjects.length];
 
     return (
       <main className="page-shell portfolio">
-        <ItemDisplay data={currProj} onBack={this.handleReturn} />
+        <ItemDisplay
+          data={currProj}
+          nextProject={nextProject}
+          onBack={this.handleReturn}
+          onSelect={this.handleSelection}
+        />
       </main>
     );
   }

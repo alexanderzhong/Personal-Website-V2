@@ -50,7 +50,7 @@
 .case-study-header {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 20px;
+  gap: 14px;
   width: 100%;
   max-width: var(--case-study-article-width);
   margin-inline: auto;
@@ -100,9 +100,16 @@
   margin: 0;
   color: var(--on-background);
   font-size: 42px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.011em;
   line-height: 52px;
+}
+
+.case-study-deck {
+  margin: 0;
+  color: var(--on-background-variant);
+  font-size: 1.08rem;
+  line-height: 1.55;
 }
 
 .case-study-meta {
@@ -190,8 +197,10 @@
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  max-height: 420px;
+  object-fit: contain;
   object-position: center center;
+  background-color: var(--surface-subtle);
   user-select: none;
 }
 
@@ -308,10 +317,10 @@
   margin: 0;
   color: rgba(var(--black-rgb), 0.8);
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 400;
   letter-spacing: -0.003em;
-  line-height: 32px;
+  line-height: 31px;
 }
 
 .case-study-list li {
@@ -351,8 +360,50 @@
   background-color: rgba(var(--black-rgb), 0.035);
   color: var(--on-background);
   font-size: 0.82rem;
-  font-weight: 560;
+  font-weight: 500;
   line-height: 1.2;
+}
+
+.case-study-next {
+  padding-top: 28px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.case-study-next button {
+  display: grid;
+  gap: 7px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--on-background);
+  cursor: pointer;
+  text-align: left;
+}
+
+.case-study-next span {
+  color: var(--on-background-variant);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.case-study-next strong {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.case-study-next button:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.case-study-next button:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid var(--primary);
+  outline-offset: 5px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -371,7 +422,8 @@
   }
 
   .carousel-slide img {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
+    max-height: 280px;
   }
 
   .carousel-controls {
@@ -398,13 +450,13 @@
 
   .case-study-content p,
   .case-study-list {
-    font-size: 18px;
-    line-height: 30px;
+    font-size: 17px;
+    line-height: 28px;
   }
 }
 
 @media only screen and (max-width: 420px) {
   .carousel-slide img {
-    aspect-ratio: 1.2 / 1;
+    aspect-ratio: 16 / 10;
   }
 }

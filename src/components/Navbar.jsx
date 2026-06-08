@@ -1,88 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { createPortal } from "react-dom";
-import { Menu } from "lucide-react";
 import "./Navbar.css";
-import Sidebar from "./Sidebar.jsx";
-import { SidebarData } from "./SidebarData.jsx";
-import { Button } from "./ui";
+import { NavigationData } from "./NavigationData.jsx";
 
-class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.setModalOpen = this.setModalOpen.bind(this);
-    this.setPage = this.setPage.bind(this);
-    this.state = {
-      modalOpen: false,
-      page: 0,
-    };
-  }
-
-  setModalOpen = (open) => {
-    this.setState({
-      modalOpen: open,
-    });
-  };
-
-  setPage = (page) => {
-    this.setState({ page: page });
-  };
-
-  render() {
-    return (
-      <>
-        <header className="navbar-root">
-          <div className="mobile-navbar-content">
-            <Link
-              to="/"
-              className="mobile-navbar-brand"
-              onClick={() => this.setModalOpen(false)}
+function Navbar() {
+  return (
+    <header className="navbar-root">
+      <nav className="navbar-container" aria-label="Primary navigation">
+        <Link to="/" className="navbar-brand">
+          Alexander Zhong
+        </Link>
+        <div className="top-nav-container">
+          {NavigationData.map((item) => (
+            <NavLink
+              key={item.path}
+              exact={item.path === "/"}
+              to={item.path}
+              className="top-nav-option"
+              activeClassName="top-nav-option-active"
             >
-              Alexander Zhong
-            </Link>
-            <Button
-              variant="ghost"
-              className="menu-bars"
-              onClick={() => this.setModalOpen(true)}
-              aria-label="Open navigation menu"
-              aria-expanded={this.state.modalOpen}
-            >
-              <Menu aria-hidden="true" size={24} strokeWidth={2} />
-            </Button>
-          </div>
-
-          <nav className="navbar-container">
-            <Link to="/" className="navbar-brand">
-              Alexander Zhong
-            </Link>
-            <div className="top-nav-container">
-              {SidebarData.map((item, index) => (
-                <NavLink
-                  key={index}
-                  exact={item.path === "/"}
-                  to={item.path}
-                  className="top-nav-option"
-                  activeClassName="top-nav-option-active"
-                >
-                  <span className="top-nav-label">{item.title}</span>
-                </NavLink>
-              ))}
-            </div>
-          </nav>
-        </header>
-
-        {this.state.modalOpen &&
-          createPortal(
-            <Sidebar
-              closeModal={() => this.setModalOpen(false)}
-              modalOpen={this.state.modalOpen}
-              setPage={this.setPage}
-            />,
-            document.body,
-          )}
-      </>
-    );
-  }
+              <span className="top-nav-label">{item.title}</span>
+            </NavLink>
+          ))}
+        </div>
+      </nav>
+    </header>
+  );
 }
 
 export default Navbar;

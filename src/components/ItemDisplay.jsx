@@ -107,6 +107,7 @@ export class ItemDisplay extends Component {
             <span>{data.title}</span>
           </nav>
           <h1>{data.title}</h1>
+          <p className="case-study-deck">{data.brief}</p>
           <div className="case-study-meta">
             <span className={`case-study-type type-${data.type}`}>
               {data.type}
@@ -155,6 +156,18 @@ export class ItemDisplay extends Component {
                 ))}
               </div>
             </section>
+          )}
+
+          {this.props.nextProject && (
+            <nav className="case-study-next" aria-label="Continue reading">
+              <button
+                type="button"
+                onClick={() => this.props.onSelect(this.props.nextProject.id)}
+              >
+                <span>Next project</span>
+                <strong>{this.props.nextProject.title}</strong>
+              </button>
+            </nav>
           )}
         </div>
       </article>

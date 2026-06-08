@@ -5,6 +5,15 @@ import PropTypes from "prop-types";
 
 class Grid extends Component {
   render() {
+    if (this.props.elements.length === 0) {
+      return (
+        <div className="grid-empty">
+          <h2>No matching work</h2>
+          <p>Try another search term or filter.</p>
+        </div>
+      );
+    }
+
     const items = this.props.elements.map((ele) => (
       <div key={ele.id} className="grid-item">
         <PortfolioElement
