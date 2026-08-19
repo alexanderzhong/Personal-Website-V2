@@ -258,7 +258,7 @@ export const PortfolioData = [
         title: "Architecture",
         paragraphs: [
           "The frontend is built with React, Vite, Tailwind CSS, and shadcn/ui. Firebase Authentication manages user identity, and the frontend sends a Firebase ID token with each request to an Express API.",
-          "The Express server verifies authentication and trip ownership, validates incoming data, calls OpenAI and location services, and stores plans, profiles, packing lists, and usage records in Firestore. The frontend is deployed through GitHub Pages, while the Dockerized backend is configured for Google Cloud Run.",
+          "The Express server verifies authentication and trip ownership, validates incoming data, calls Anthropic and location services, and stores plans, profiles, packing lists, and usage records in Firestore. The frontend is deployed through GitHub Pages, while the Dockerized backend is configured for Google Cloud Run.",
           "The server requests JSON-only model responses using a strict itinerary contract with required fields, accepted event types, date formats, and scheduling rules. Every response is parsed, normalized, sanitized, and validated before it can be returned or stored.",
         ],
       },
@@ -292,7 +292,7 @@ export const PortfolioData = [
       "Express",
       "Firebase Auth",
       "Firestore",
-      "OpenAI",
+      "Anthropic",
       "Google Places",
       "Google Routes",
       "Jest",
